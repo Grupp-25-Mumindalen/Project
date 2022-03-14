@@ -4,123 +4,175 @@ using UnityEngine;
 
 public class PendulumusPrototypus : MonoBehaviour
 {
-    [Header("Debug variables")]
     [SerializeField] private GameObject pendulum;
-    [SerializeField] private float objectMass;
-    [SerializeField] private Vector3 gravity;
-    [SerializeField] private Vector3 cumulativeForce;
-    [SerializeField] private Vector3 angularVelocity;
-    [SerializeField] private float potentialEnergy;
-    [SerializeField] private float totalEnergy;
-    [SerializeField] private float currentHeight;
+    private Vector3 gravity;
     private float armLength;
-
-
-
-
-
-    [Header("Real hot variables in your area")]
-    private static float simulationSpeed = 100;
+    private float objectMass;
+    private float objectDrag;
+    private float objectArea;
+    private float prototypeDamp;
+    private static float simulationSpeed = 200;
     [SerializeField] int formerDirection = 0;
     [SerializeField] int formerSpeedDirection = 0;
-    int phaseCounter = 0;
-    [SerializeField] float dumbRotationSpeed = 0;
-    [SerializeField] float dumbAcceleration = 0;
-    [SerializeField] float dumbAngle;
+
+    [SerializeField] float angularVelocity = 0;
+    [SerializeField] float acceleration = 0;
+    [SerializeField] float pendulumAngle;
+
+    private int phaseCounter = 0;
+
+    [SerializeField] private bool initializedDirections = false;
+    [SerializeField] static public bool isActive { get; private set; } = false;
+    [SerializeField] private float dragScale = 0;
+
     private void Start()
+    {
+        EventHandler.current.onPendulumSimulationStart += OnStartSimulation;
+        EventHandler.current.onPendulumSimulationStop += OnStopSimulation;
+    }
+
+    private void OnDestroy()
+    {
+        EventHandler.current.onPendulumSimulationStart -= OnStartSimulation;
+        EventHandler.current.onPendulumSimulationStop -= OnStopSimulation;
+    }
+
+    public void OnStartSimulation()
+    {
+        ResetPendulum();
+        InitPendulum();
+        SetPendulumActivity(true);
+    }
+
+    public void OnStopSimulation()
+    {
+        SetPendulumActivity(false);
+    }
+
+
+    /*
+     * This function Initializes the pendulum. Call it anytime you start the experiment.
+     */
+    public void InitPendulum()
     {
         if (gravity.y == 0)
         {
             gravity.y = Physics.gravity.y;
         }
+
         armLength = Vector3.Distance(pendulum.transform.position, transform.position);
-        objectMass = pendulum.GetComponent<Weightusweightus>().GetWeight();
+        Weightusweightus weight = pendulum.GetComponent<Weightusweightus>();
+        objectMass = weight.GetWeight();
+        //objectDrag = weight.GetDragCoefficient();
+        //objectArea = weight.GetFrontalArea();
+        prototypeDamp = weight.GetPrototypeDamping();
+        pendulumAngle = transform.rotation.eulerAngles.z;
+    }
 
-        potentialEnergy = CalculatePotentialEnergy();
+    //Set whether or not the pendulum should simulate
+    public void SetPendulumActivity (bool value)
+    {
+        print(value);
+        isActive = value;
+    }
 
-        totalEnergy = potentialEnergy;
-        totalEnergy += 0.1f;
-        dumbAngle = transform.rotation.eulerAngles.z;
+    //Set the scaling of drag. Convenient for defining a vacuum, earth-like drag or something inbetween.
+    public void SetDragScale(float dragScale)
+    {
+        this.dragScale = dragScale;
+    }
+
+    //Reset all speed-related pendulum values
+    public void ResetPendulum ()
+    {
+        acceleration = 0;
+        angularVelocity = 0;
+        formerDirection = 0;
+        formerSpeedDirection = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*
-        Vector3 ropeDirection = pendulum.transform.up;
-
-        Vector3 forceDir = Vector3.ProjectOnPlane(gravity, ropeDirection);
-
-        Vector3 currentRotation = transform.rotation.eulerAngles;
-
-        float kEnergi = totalEnergy - CalculatePotentialEnergy();
-
-        float velocityMagnitude = Mathf.Sqrt((kEnergi*2)/objectMass);
-
-        Vector3 pendiSpeed = forceDir.normalized * velocityMagnitude;
-
-        print(velocityMagnitude);
-        */
-
-        dumbAcceleration = (gravity.y / armLength) * Mathf.Sin(dumbAngle * Mathf.Deg2Rad) * simulationSpeed;
-
-        dumbRotationSpeed += dumbAcceleration * Time.deltaTime;
-
-        dumbAngle += this.dumbRotationSpeed * Time.deltaTime;
-
-        dumbAngle = Mathf.Clamp(dumbAngle, 225, 360 + 135);
-
-        if(formerDirection == 0)
+        if (isActive)
         {
-            formerDirection = dumbAngle > 360 ? 1 : -1;
+            if(pendulumAngle>180)
+            {
+                pendulumAngle -= 360; //one side of the pendulum arc gets positive degrees, the other gets negatives
+            }
+            acceleration = (gravity.y / armLength) * Mathf.Sin(pendulumAngle * Mathf.Deg2Rad) * simulationSpeed;
+            
+            /*
+            float bobVelocity = angularVelocity * Mathf.Deg2Rad * armLength;
+
+            float dragForce = 0.6f * objectDrag * objectArea * Mathf.Pow(bobVelocity, 2) * dragScale;
+
+            float dragAcceleration = dragForce / objectMass;
+            */
+
+            angularVelocity += acceleration * Time.deltaTime;
+
+            angularVelocity *= 1 - (prototypeDamp * Time.deltaTime) * dragScale;
+
+            pendulumAngle += this.angularVelocity * Time.deltaTime;
+
+            pendulumAngle = pendulumAngle; Mathf.Clamp(pendulumAngle, 225, 360 + 135);
+
+            Quaternion q = Quaternion.Euler(0, 0, pendulumAngle);
+            transform.rotation = q;
+
+            DoPhaseCheck();
+
         }
+    }
 
-        if (formerSpeedDirection == 0)
-        {
-            formerSpeedDirection = dumbRotationSpeed > 0 ? 1 : -1;
-        }
 
-        Quaternion q = Quaternion.Euler(0, 0, dumbAngle);
 
-        transform.rotation = q;
+    /*
+     * Checks in which direction the pendulum currently points, and where its velocity vector points towards. 
+     * When the velocity switches sign, we have switched phase of oscillation
+     * When the angle passes the 360-degree mark from any direction, the pendulum has gone through the mid-point
+     */
+    public void DoPhaseCheck()
+    {
+        if (!initializedDirections) InitializeDirections();
 
-        int currentDir = dumbAngle > 360 ? 1 : -1;
+        int currentDir = pendulumAngle > 0 ? 1 : -1;
 
         if (currentDir != formerDirection)
         {
             MidPass();
         }
 
-        int currentSpeedDir = dumbRotationSpeed > 0 ? 1 : -1;
+        int currentSpeedDir = angularVelocity > 0 ? 1 : -1;
 
         if (currentSpeedDir != formerSpeedDirection)
         {
             PhaseChange();
         }
 
-        formerDirection = dumbAngle > 360 ? 1 : -1;
-        formerSpeedDirection = dumbRotationSpeed > 0 ? 1 : -1;
+        formerDirection = pendulumAngle > 0 ? 1 : -1;
+        formerSpeedDirection = angularVelocity > 0 ? 1 : -1;
     }
 
-    public float CalculatePotentialEnergy ()
+
+
+    //Set the initial values for the tracer variables
+    public void InitializeDirections()
     {
-        Vector3 pendulumDir = pendulum.transform.position - this.transform.position;
-
-        float angle = Vector3.Angle(pendulumDir, Vector3.down) * Mathf.Deg2Rad;
-
-        float heightFromMommy = Mathf.Cos(angle) * armLength;
-
-        float startHeight = (armLength - heightFromMommy);
-
-        return - (objectMass* (startHeight) * gravity.y);
+        formerDirection = pendulumAngle > 0 ? 1 : -1;
+        formerSpeedDirection = angularVelocity > 0 ? 1 : -1;
+        initializedDirections = true;
     }
 
+    //Call the event manager to call a custom event for passing the middle
     public void MidPass ()
     {
-        print("Ding in the middle!!!!");
-        GetComponent<AudioSource>().Play();
+        print("Pass middle");
+        EventHandler.current.PendulumPassMiddle();
     }
 
+    //The pendulum has reached a high point and will switch phase. If this is the second switch in a row, the pendulum has done a full oscillation
     public void PhaseChange ()
     {
         phaseCounter++;
@@ -129,11 +181,12 @@ public class PendulumusPrototypus : MonoBehaviour
             phaseCounter = 0;
             FinishOscillation();
         }
-        print("Halfway there");
     }
 
+    //The pendulum has made a full oscillation. Call a custom event from the event manager
     public void FinishOscillation()
     {
         print("Did one full Oscillation");
+        EventHandler.current.PendulumNewOscillation();
     }
 }

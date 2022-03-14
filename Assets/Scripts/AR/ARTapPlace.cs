@@ -24,8 +24,8 @@ public class ARTapPlace : MonoBehaviour
     private ARRaycastManager rayCastMgr; // Needed to Raycast
     private ARPlaneManager arPlaneMgr;
 
-    private bool placementValid = false;
-    private bool active = false;
+    public bool placementValid { get; private set;} = false;
+    public bool active { get; private set;} = false;
 
     // Start is called before the first frame update
     void Start()
@@ -39,35 +39,29 @@ public class ARTapPlace : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!active) {
+        if(!active){
             UpdatePlacementPose();
             UpdatePlacementIndicator();
-            PlaceObject();
-        } else {
-            ResetAR();   
         }
     }
 
-    /*  placeObject()
+    /*  PlaceObject()
         Checks for input and validity of placement indicator to place the object
     */
-    private void PlaceObject() {
-        if(placementValid && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) { // Checks if plane valid, if screen touched and check phase of the fingers (the first) to see if it just began
-            placementPose.position.y += (float) 0.5;
-            placedObject = Instantiate(objToPlace, placementPose.position, placementPose.rotation);
-            active = true;
-            DisablePlanes();
-        }
+    public void PlaceObject() {
+
+        placementPose.position.y += (float)0.5;
+        placedObject = Instantiate(objToPlace, placementPose.position, placementPose.rotation);
+        active = true;
+        DisablePlanes();
     }
 
     /* NOT TESTED YET STILL IMPLEMENTING
     */
     public void ResetAR() {
-        if(Input.touchCount > 1 && Input.GetTouch(0).phase == TouchPhase.Began) {
-            Destroy(placedObject); //or objTopPlace.SetActive(false);
-            active = false;
-            EnablePlanes();
-        }
+        Destroy(placedObject); //or objTopPlace.SetActive(false);
+        active = false;
+        EnablePlanes();
     }
 
     /*
@@ -124,21 +118,5 @@ public class ARTapPlace : MonoBehaviour
             var cameraBearing = new Vector3(cameraForward.x, 0, cameraForward.z).normalized; // Enhetsvektor, just a direction no scalar
             placementPose.rotation = Quaternion.LookRotation(cameraBearing); // Creates rotation from forward and upward direction
         }
-    }
-
-    // Getters of status of the AR
-
-    /*  ObjActive()
-        Returns the status of the Pendulum
-    */
-    public bool ObjActive() {
-        return active;
-    }
-
-    /*  PlacementValid()
-        Returns the status of the placement
-    */
-    public bool PlacementValid() {
-        return placementValid;
     }
 }
