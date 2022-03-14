@@ -487,7 +487,7 @@ MonoBehaviour:
   m_SerializedLibrary: {fileID: 11400000, guid: 54a28672f24cae84cb93c9ac4a6c9e65,
     type: 2}
   m_MaxNumberOfMovingImages: 1
-  m_TrackedImagePrefab: {fileID: 519343884415740144, guid: 61206e9dfe026c64cb04321f60e69e0f,
+  m_TrackedImagePrefab: {fileID: 2525090582287629127, guid: 18a1c13d542fdc242a91fa55c64c476e,
     type: 3}
 --- !u!114 &1659859602
 MonoBehaviour:
@@ -517,7 +517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placement: {fileID: 1368874960}
-  objToPlace: {fileID: 519343884415740144, guid: 61206e9dfe026c64cb04321f60e69e0f,
+  objToPlace: {fileID: 2525090582287629127, guid: 18a1c13d542fdc242a91fa55c64c476e,
     type: 3}
   session: {fileID: 656880747}
 --- !u!114 &1659859604
