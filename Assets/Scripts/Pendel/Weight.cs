@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weightusweightus : MonoBehaviour
+public class Weight : MonoBehaviour
 {
     [SerializeField] private float mass;
     //[SerializeField] private float dragCoefficient;
@@ -25,7 +25,7 @@ public class Weightusweightus : MonoBehaviour
     }
     */
 
-    public float GetPrototypeDamping()
+    public float GetDamping()
     {
         return prototypeDamping;
     }

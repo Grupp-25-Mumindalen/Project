@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rotateyboi : MonoBehaviour
+public class PendulumRotationInterface : MonoBehaviour
 {
     private Camera _camera;
     private float firstHitPosX;

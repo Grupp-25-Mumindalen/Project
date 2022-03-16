@@ -30,7 +30,8 @@ public class InputManager : MonoBehaviour
                     {
                         place.PlaceObject();
                     }
-                    else if(!PendulumusPrototypus.isActive)
+                    /* This should not be the primary way to Start/Stop Simulation.
+                    else if(!PendulumManager.isActive)
                     {
                         EventHandler.current.PendulumSimulationStart();
                     }
@@ -38,6 +39,7 @@ public class InputManager : MonoBehaviour
                     {
                         EventHandler.current.PendulumSimulationStop();
                     }
+                    */
                 }
             break;
             case 2:

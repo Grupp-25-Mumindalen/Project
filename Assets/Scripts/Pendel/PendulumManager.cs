@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PendulumusPrototypus : MonoBehaviour
+public class PendulumManager : MonoBehaviour
 {
+    public static PendulumManager current;
     [SerializeField] private GameObject pendulum;
+    private bool is3D = false;
     private Vector3 gravity;
     private float armLength;
     private float objectMass;
@@ -22,19 +24,26 @@ public class PendulumusPrototypus : MonoBehaviour
     private int phaseCounter = 0;
 
     [SerializeField] private bool initializedDirections = false;
-    [SerializeField] static public bool isActive { get; private set; } = false;
+    [SerializeField] private bool isActive = false;
     [SerializeField] private float dragScale = 0;
 
     private void Start()
     {
-        EventHandler.current.onPendulumSimulationStart += OnStartSimulation;
-        EventHandler.current.onPendulumSimulationStop += OnStopSimulation;
+        if (current != null)
+            throw new System.Exception("Only one PendulumManager should be active at a time.");
+        else
+            current = this;
+        GeneralEventHandler.current.CreatePendulum();
+        GeneralEventHandler.current.onPendulumSimulationStart += OnStartSimulation;
+        GeneralEventHandler.current.onPendulumSimulationStop += OnStopSimulation;
     }
 
     private void OnDestroy()
     {
-        EventHandler.current.onPendulumSimulationStart -= OnStartSimulation;
-        EventHandler.current.onPendulumSimulationStop -= OnStopSimulation;
+        current = null;
+        GeneralEventHandler.current.DestroyPendulum();
+        GeneralEventHandler.current.onPendulumSimulationStart -= OnStartSimulation;
+        GeneralEventHandler.current.onPendulumSimulationStop -= OnStopSimulation;
     }
 
     public void OnStartSimulation()
@@ -61,11 +70,9 @@ public class PendulumusPrototypus : MonoBehaviour
         }
 
         armLength = Vector3.Distance(pendulum.transform.position, transform.position);
-        Weightusweightus weight = pendulum.GetComponent<Weightusweightus>();
+        Weight weight = pendulum.GetComponent<Weight>();
         objectMass = weight.GetWeight();
-        //objectDrag = weight.GetDragCoefficient();
-        //objectArea = weight.GetFrontalArea();
-        prototypeDamp = weight.GetPrototypeDamping();
+        prototypeDamp = weight.GetDamping();
         pendulumAngle = transform.rotation.eulerAngles.z;
     }
 
@@ -101,22 +108,12 @@ public class PendulumusPrototypus : MonoBehaviour
                 pendulumAngle -= 360; //one side of the pendulum arc gets positive degrees, the other gets negatives
             }
             acceleration = (gravity.y / armLength) * Mathf.Sin(pendulumAngle * Mathf.Deg2Rad) * simulationSpeed;
-            
-            /*
-            float bobVelocity = angularVelocity * Mathf.Deg2Rad * armLength;
-
-            float dragForce = 0.6f * objectDrag * objectArea * Mathf.Pow(bobVelocity, 2) * dragScale;
-
-            float dragAcceleration = dragForce / objectMass;
-            */
 
             angularVelocity += acceleration * Time.deltaTime;
 
             angularVelocity *= 1 - (prototypeDamp * Time.deltaTime) * dragScale;
 
             pendulumAngle += this.angularVelocity * Time.deltaTime;
-
-            pendulumAngle = pendulumAngle; Mathf.Clamp(pendulumAngle, 225, 360 + 135);
 
             Quaternion q = Quaternion.Euler(0, 0, pendulumAngle);
             transform.rotation = q;
@@ -169,12 +166,13 @@ public class PendulumusPrototypus : MonoBehaviour
     public void MidPass ()
     {
         print("Pass middle");
-        EventHandler.current.PendulumPassMiddle();
+        GeneralEventHandler.current.PendulumPassMiddle();
     }
 
     //The pendulum has reached a high point and will switch phase. If this is the second switch in a row, the pendulum has done a full oscillation
     public void PhaseChange ()
     {
+
         phaseCounter++;
         if(phaseCounter == 2)
         {
@@ -186,7 +184,26 @@ public class PendulumusPrototypus : MonoBehaviour
     //The pendulum has made a full oscillation. Call a custom event from the event manager
     public void FinishOscillation()
     {
+        GetComponent<AudioSource>().Play();
         print("Did one full Oscillation");
-        EventHandler.current.PendulumNewOscillation();
+        GeneralEventHandler.current.PendulumNewOscillation();
+    }
+
+
+
+
+    public void SetAirResistance(float resistance)
+    {
+        dragScale = resistance;
+    }
+
+    public void SetGravity(float gravity)
+    {
+        this.gravity.y = gravity;
+    }
+
+    public void Toggle3D(bool value)
+    {
+        is3D = value; 
     }
 }

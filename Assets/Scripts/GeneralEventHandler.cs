@@ -14,14 +14,14 @@ using UnityEngine;
  * called by other scripts, it must execute before any dependent scripts.
  * 
  * 
- * Written by Kei Duke-Bergman, [fill in here if you have worked on this script]
+ * Written by Kei Duke-Bergman
  */
 
 
 [DefaultExecutionOrder(-900)]
-public class EventHandler : MonoBehaviour
+public class GeneralEventHandler : MonoBehaviour
 {
-    public static EventHandler current;
+    public static GeneralEventHandler current;
     void Start()
     {
         current = this;
@@ -35,7 +35,7 @@ public class EventHandler : MonoBehaviour
      */
     public void PendulumPassMiddle()
     {
-        if(onPendulumPassMiddle != null)
+        if (onPendulumPassMiddle != null)
         {
             onPendulumPassMiddle();
         }
@@ -56,28 +56,13 @@ public class EventHandler : MonoBehaviour
     }
 
     //Define a custom event onPendulumStartSimulation
-    public event Action onPendulumSpawn;
-    /*
-     * This function gets called by the pendulum upon the bob passing through the middle
-     * If it has any functions tied to the custom event declared above, it calls those.
-     */
-    public void PendulumSpawn()
-    {
-        if (onPendulumSpawn != null)
-        {
-            onPendulumSpawn();
-        }
-    }
-
-    //Define a custom event onPendulumStartSimulation
     public event Action onPendulumSimulationStart;
     /*
-     * This function gets called by X upon starting the simulation
+     * This function gets called by SimulationToggle upon starting the simulation
      * If it has any functions tied to the custom event declared above, it calls those.
      */
-    public void PendulumSimulationStart()
+    public void StartPendulumSimulation()
     {
-        print("ps");
         if (onPendulumSimulationStart != null)
         {
             onPendulumSimulationStart();
@@ -87,16 +72,50 @@ public class EventHandler : MonoBehaviour
     //Define a custom event onPendulumStopSimulation
     public event Action onPendulumSimulationStop;
     /*
-     * This function gets called by X upon stopping the simulation
+     * This function gets called by SimulationToggle upon stopping the simulation
      * If it has any functions tied to the custom event declared above, it calls those.
      */
-    public void PendulumSimulationStop()
+    public void StopPendulumSimulation()
     {
-        print("pst");
         if (onPendulumSimulationStop != null)
         {
             onPendulumSimulationStop();
         }
     }
 
+    public event Action onSuccessConditionMet;
+    public void SuccessConditionMet()
+    {
+        if (onSuccessConditionMet != null)
+        {
+            onSuccessConditionMet();
+        }
+    }
+
+    public event Action onGoToNextLevel;
+    public void GoToNextLevel()
+    {
+        if(onGoToNextLevel != null)
+        {
+            onGoToNextLevel();
+        }
+    }
+
+    public event Action onCreatePendulum;
+    public void CreatePendulum()
+    {
+        if(onCreatePendulum != null)
+        {
+            onCreatePendulum();
+        }
+    }
+
+    public event Action onDestroyPendulum;
+    public void DestroyPendulum()
+    {
+        if(onDestroyPendulum != null)
+        {
+            onDestroyPendulum();
+        }
+    }
 }
