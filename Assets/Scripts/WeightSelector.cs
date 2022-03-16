@@ -23,6 +23,7 @@ public class WeightSelector : MonoBehaviour
     private void OnCreatePendulum ()
     {
         pendulum = PendulumManager.current;
+        ChangeWeight(0);
     }
 
     private void OnDestroyPendulum ()
@@ -38,9 +39,11 @@ public class WeightSelector : MonoBehaviour
 
     public void ChangeWeight(int index)
     {
-        if(pendulum)
+        GameObject prefab = weightList.weights[index].prefab;
+        print(prefab + "+" + pendulum);
+        if (pendulum && prefab)
         {
-
+            pendulum.ChangeWeight(prefab);
         }
     }
 }

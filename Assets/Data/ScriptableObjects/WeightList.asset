@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8ab010d90194dc488418e3ec72993b5, type: 3}
   m_Name: WeightList
   m_EditorClassIdentifier: 
-  weights: []
+  weights:
+  - name: IsakCube
+    prefab: {fileID: 632963370340665680, guid: 8610a8496c635854dbc67ac7e17b4d72, type: 3}
+  - name: Milk
+    prefab: {fileID: 919132149155446097, guid: 0903919e0e5ad3c46b5bc7b34d571c07, type: 3}
