@@ -79,7 +79,6 @@ public class PendulumManager : MonoBehaviour
     //Set whether or not the pendulum should simulate
     public void SetPendulumActivity (bool value)
     {
-        print(value);
         isActive = value;
     }
 
@@ -92,6 +91,7 @@ public class PendulumManager : MonoBehaviour
     //Reset all speed-related pendulum values
     public void ResetPendulum ()
     {
+        initializedDirections = false;
         acceleration = 0;
         angularVelocity = 0;
         formerDirection = 0;
@@ -116,10 +116,10 @@ public class PendulumManager : MonoBehaviour
             pendulumAngle += this.angularVelocity * Time.deltaTime;
 
             Quaternion q = Quaternion.Euler(0, 0, pendulumAngle);
+
             transform.rotation = q;
 
             DoPhaseCheck();
-
         }
     }
 
@@ -149,6 +149,7 @@ public class PendulumManager : MonoBehaviour
         }
 
         formerDirection = pendulumAngle > 0 ? 1 : -1;
+
         formerSpeedDirection = angularVelocity > 0 ? 1 : -1;
     }
 
@@ -165,7 +166,6 @@ public class PendulumManager : MonoBehaviour
     //Call the event manager to call a custom event for passing the middle
     public void MidPass ()
     {
-        print("Pass middle");
         GeneralEventHandler.current.PendulumPassMiddle();
     }
 
@@ -185,7 +185,6 @@ public class PendulumManager : MonoBehaviour
     public void FinishOscillation()
     {
         GetComponent<AudioSource>().Play();
-        print("Did one full Oscillation");
         GeneralEventHandler.current.PendulumNewOscillation();
     }
 
