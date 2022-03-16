@@ -85,7 +85,6 @@ public class LevelManager : MonoBehaviour
             {
                 case Level.SuccessCondition.PENDULUM_OSCILLATION:
                     checkValue = counter.GetOscillations();
-                    print(checkValue);
                     break;
                 case Level.SuccessCondition.TIME_PER_OSCILLATION:
                     checkValue = timer.GetLatestTime();
