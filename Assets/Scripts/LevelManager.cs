@@ -114,11 +114,11 @@ public class LevelManager : MonoBehaviour
         levelIndex += 1;
         level = levels[levelIndex];
         SetConstraints();
+        GeneralEventHandler.current.StopPendulumSimulation();
     }
 
     public void SetConstraints()
     {
-        GeneralEventHandler.current.StopPendulumSimulation();
         pendulum.SetAirResistance(level.airResistance);
         pendulum.SetGravity(level.gravity);
         pendulum.Toggle3D(level.is3D);

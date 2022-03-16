@@ -6,6 +6,7 @@ public class PendulumManager : MonoBehaviour
 {
     public static PendulumManager current;
     [SerializeField] private GameObject pendulum;
+    [SerializeField] private GameObject anchor;
     private bool is3D = false;
     private Vector3 gravity;
     private float armLength;
@@ -56,6 +57,18 @@ public class PendulumManager : MonoBehaviour
     public void OnStopSimulation()
     {
         SetPendulumActivity(false);
+    }
+
+    public void ChangeWeight(GameObject newObject)
+    {
+        print("AA");
+        if(pendulum)
+        {
+            Destroy(pendulum);
+        }
+        GameObject obj = Instantiate(newObject, anchor.transform, false);
+        obj.transform.localPosition = Vector3.zero;
+        pendulum = obj;
     }
 
 
@@ -172,7 +185,6 @@ public class PendulumManager : MonoBehaviour
     //The pendulum has reached a high point and will switch phase. If this is the second switch in a row, the pendulum has done a full oscillation
     public void PhaseChange ()
     {
-
         phaseCounter++;
         if(phaseCounter == 2)
         {

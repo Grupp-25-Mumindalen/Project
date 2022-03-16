@@ -104,7 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2525090582287629121}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: p_Pendulum
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -237,7 +237,7 @@ GameObject:
   - component: {fileID: 7358494922351012861}
   - component: {fileID: 7358494922351012858}
   - component: {fileID: 7358494922351012862}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -322,6 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pendulum: {fileID: 0}
+  anchor: {fileID: 7358494923027130671}
   formerDirection: 0
   formerSpeedDirection: 0
   angularVelocity: 0
@@ -465,7 +466,7 @@ GameObject:
   - component: {fileID: 7358494922602245834}
   - component: {fileID: 7358494922602245837}
   - component: {fileID: 7358494922602245836}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -480,8 +481,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7358494922602245838}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.88, z: 0}
-  m_LocalScale: {x: 0.1, y: 1, z: 0.1}
+  m_LocalPosition: {x: -0, y: -2.4296, z: 0}
+  m_LocalScale: {x: 0.1, y: 4.099156, z: 0.1}
   m_Children: []
   m_Father: {fileID: 7358494922351012801}
   m_RootOrder: 0
@@ -557,7 +558,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7358494923027130668}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Weight_anchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
