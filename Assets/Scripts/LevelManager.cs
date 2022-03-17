@@ -4,6 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Timer))]
 [RequireComponent(typeof(OscillationCounter))]
+[RequireComponent(typeof(WeightSelector))]
 [DefaultExecutionOrder(-800)]
 public class LevelManager : MonoBehaviour
 {

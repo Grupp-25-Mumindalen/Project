@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1890229434658099237}
   - component: {fileID: 1890229434658099242}
   - component: {fileID: 1890229434658099243}
+  - component: {fileID: 551109207575343453}
   - component: {fileID: 1890229434658099240}
   - component: {fileID: 1890229434658099239}
   m_Layer: 0
@@ -77,6 +78,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   oscillations: 0
+--- !u!114 &551109207575343453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890229434658099241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a88001747f2eb24694693abbf74a344, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weightList: {fileID: 11400000, guid: a2238c069dc9d2946a553b391f61d846, type: 2}
+  uniqueSelections: 
 --- !u!114 &1890229434658099240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,9 +113,7 @@ MonoBehaviour:
     canAdjustWeight: 1
     canControlAirResistance: 1
     canControlGravity: 1
-    successCondition: 0
-    conditionValue: 0
-    conditionValueBounds: 0
+    successConditions: []
   levelIndex: 0
   levels:
   - airResistance: 0
@@ -111,9 +124,7 @@ MonoBehaviour:
     canAdjustWeight: 0
     canControlAirResistance: 0
     canControlGravity: 0
-    successCondition: 0
-    conditionValue: 3
-    conditionValueBounds: 0.5
+    successConditions: []
   - airResistance: 1
     gravity: 0
     is3D: 0
@@ -122,9 +133,7 @@ MonoBehaviour:
     canAdjustWeight: 0
     canControlAirResistance: 0
     canControlGravity: 0
-    successCondition: 0
-    conditionValue: 0
-    conditionValueBounds: 0
+    successConditions: []
   - airResistance: 0
     gravity: 0
     is3D: 0
@@ -133,9 +142,7 @@ MonoBehaviour:
     canAdjustWeight: 0
     canControlAirResistance: 0
     canControlGravity: 0
-    successCondition: 0
-    conditionValue: 0
-    conditionValueBounds: 0
+    successConditions: []
 --- !u!114 &1890229434658099239
 MonoBehaviour:
   m_ObjectHideFlags: 0
