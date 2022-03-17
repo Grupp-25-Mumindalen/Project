@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[DefaultExecutionOrder(100)]
 public class PendulumManager : MonoBehaviour
 {
     public static PendulumManager current;
@@ -62,7 +62,6 @@ public class PendulumManager : MonoBehaviour
 
     public void ChangeWeight(GameObject newObject)
     {
-        print("AA");
         if(pendulum)
         {
             Destroy(pendulum);
@@ -212,6 +211,11 @@ public class PendulumManager : MonoBehaviour
         Vector3 v = anchor.transform.localPosition;
         v.y = distance;
         anchor.transform.localPosition = v;
+    }
+
+    public Vector3 GetAnchorPosition()
+    {
+        return anchor.transform.position;
     }
 
     public void SetAirResistance(float resistance)
