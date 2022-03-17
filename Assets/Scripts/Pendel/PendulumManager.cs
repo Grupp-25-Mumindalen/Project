@@ -202,7 +202,17 @@ public class PendulumManager : MonoBehaviour
     }
 
 
+    public float GetPendulumDistance()
+    {
+        return -Mathf.Sign(pendulum.transform.position.y) * Vector2.Distance(transform.position, pendulum.transform.position);
+    }
 
+    public void SetPendulumDistance(float distance)
+    {
+        Vector3 v = anchor.transform.localPosition;
+        v.y = distance;
+        anchor.transform.localPosition = v;
+    }
 
     public void SetAirResistance(float resistance)
     {
