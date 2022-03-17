@@ -41,6 +41,7 @@ public class PendulumManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        GeneralEventHandler.current.StopPendulumSimulation();
         current = null;
         GeneralEventHandler.current.DestroyPendulum();
         GeneralEventHandler.current.onPendulumSimulationStart -= OnStartSimulation;
