@@ -1228,6 +1228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weightList: {fileID: 11400000, guid: a2238c069dc9d2946a553b391f61d846, type: 2}
+  uniqueSelections: 
 --- !u!1 &1957553137
 GameObject:
   m_ObjectHideFlags: 0
@@ -1416,6 +1417,51 @@ PrefabInstance:
       propertyPath: m_button
       value: 
       objectReference: {fileID: 1957553139}
+    - target: {fileID: 1890229434658099240, guid: 0a9a7a9852a8f924aac0b4f3a8c5bb6c,
+        type: 3}
+      propertyPath: levels.Array.data[0].successConditions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1890229434658099240, guid: 0a9a7a9852a8f924aac0b4f3a8c5bb6c,
+        type: 3}
+      propertyPath: levels.Array.data[0].successConditions.Array.data[0].boundMax
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1890229434658099240, guid: 0a9a7a9852a8f924aac0b4f3a8c5bb6c,
+        type: 3}
+      propertyPath: levels.Array.data[0].successConditions.Array.data[0].boundMin
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1890229434658099240, guid: 0a9a7a9852a8f924aac0b4f3a8c5bb6c,
+        type: 3}
+      propertyPath: levels.Array.data[0].successConditions.Array.data[1].boundMax
+      value: Infinity
+      objectReference: {fileID: 0}
+    - target: {fileID: 1890229434658099240, guid: 0a9a7a9852a8f924aac0b4f3a8c5bb6c,
+        type: 3}
+      propertyPath: levels.Array.data[0].successConditions.Array.data[0].conditionValue
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1890229434658099240, guid: 0a9a7a9852a8f924aac0b4f3a8c5bb6c,
+        type: 3}
+      propertyPath: levels.Array.data[0].successConditions.Array.data[1].conditionValue
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1890229434658099240, guid: 0a9a7a9852a8f924aac0b4f3a8c5bb6c,
+        type: 3}
+      propertyPath: levels.Array.data[0].successConditions.Array.data[1].successCondition
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1890229434658099240, guid: 0a9a7a9852a8f924aac0b4f3a8c5bb6c,
+        type: 3}
+      propertyPath: levels.Array.data[0].successConditions.Array.data[0].conditionValueBounds
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1890229434658099240, guid: 0a9a7a9852a8f924aac0b4f3a8c5bb6c,
+        type: 3}
+      propertyPath: levels.Array.data[0].successConditions.Array.data[1].conditionValueBounds
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1890229434658099241, guid: 0a9a7a9852a8f924aac0b4f3a8c5bb6c,
         type: 3}
       propertyPath: m_Name
@@ -1499,6 +1545,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -4.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 7358494923027130668, guid: 18a1c13d542fdc242a91fa55c64c476e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7358494923027130668, guid: 18a1c13d542fdc242a91fa55c64c476e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7358494923027130668, guid: 18a1c13d542fdc242a91fa55c64c476e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7358494923027130668, guid: 18a1c13d542fdc242a91fa55c64c476e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7358494923027130668, guid: 18a1c13d542fdc242a91fa55c64c476e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18a1c13d542fdc242a91fa55c64c476e, type: 3}

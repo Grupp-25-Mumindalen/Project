@@ -2,29 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof (Timer))]
-[RequireComponent(typeof (OscillationCounter))]
+[RequireComponent(typeof(Timer))]
+[RequireComponent(typeof(OscillationCounter))]
 [DefaultExecutionOrder(-800)]
 public class LevelManager : MonoBehaviour
 {
+    public static LevelManager current;
     [System.Serializable]
     public class Level
     {
         [Header("Constraints")]
-        [SerializeField] public float airResistance = 1;
-        [SerializeField] public float gravity = 0;
-        [SerializeField] public bool is3D = true;
-        [SerializeField] public bool canAdjustAngle = true;
-        [SerializeField] public bool canAdjustLength = true;
-        [SerializeField] public bool canAdjustWeight = true;
-        [SerializeField] public bool canControlAirResistance = true;
-        [SerializeField] public bool canControlGravity = true;
+        public float airResistance = 1;
+        public float gravity = 0;
+        public bool is3D = true;
+        public bool canAdjustAngle = true;
+        public bool canAdjustLength = true;
+        public bool canAdjustWeight = true;
+        public bool canControlAirResistance = true;
+        public bool canControlGravity = true;
 
-        [Header("Success condition")]
-        [SerializeField] public SuccessCondition successCondition;
-        [SerializeField] public float conditionValue;
-        [SerializeField] public float conditionValueBounds;
-        public enum SuccessCondition
+        [Header("Success condition(s)")]
+        public SuccessCondition[] successConditions;
+    }
+    [System.Serializable]
+    public class SuccessCondition
+    {
+        public Condition successCondition;
+        public float conditionValue;
+        [Tooltip("How much the actual value is allowed to diverge below the conditionValue")]
+        public float boundMin;
+        [Tooltip("How much the actual value is allowed to diverge above the conditionValue")]
+        public float boundMax;
+        public enum Condition
         {
             PENDULUM_OSCILLATION,
             TIME_PER_OSCILLATION,
@@ -39,6 +48,7 @@ public class LevelManager : MonoBehaviour
 
     private Timer timer;
     private OscillationCounter counter;
+    private WeightSelector weightSelector;
     private PendulumManager pendulum;
 
     // Start is called before the first frame update
@@ -47,6 +57,7 @@ public class LevelManager : MonoBehaviour
         level = levels[0];
         timer = this.GetComponent<Timer>();
         counter = this.GetComponent<OscillationCounter>();
+        weightSelector = this.GetComponent<WeightSelector>();
         GeneralEventHandler.current.onGoToNextLevel += OnGoToNextLevel;
         GeneralEventHandler.current.onCreatePendulum += OnCreatePendulum;
         GeneralEventHandler.current.onDestroyPendulum += OnDestroyPendulum;
@@ -62,7 +73,13 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckSuccesCondition();
+        if (!metSuccessCondition)
+        {
+            if (MeetsSuccesCondition())
+            {
+                ClearLevel();
+            }
+        }
     }
 
     void OnCreatePendulum()
@@ -76,33 +93,41 @@ public class LevelManager : MonoBehaviour
     }
 
 
-    void CheckSuccesCondition()
+    bool MeetsSuccesCondition()
     {
-        float checkValue = 0;
-        if (!metSuccessCondition)
+        bool returnVal = true;
+        if(level.successConditions.Length == 0)
         {
-            switch (level.successCondition)
+            returnVal = false;
+        }
+        foreach (SuccessCondition condition in level.successConditions)
+        {
+            float checkValue = 0;
+            switch (condition.successCondition)
             {
-                case Level.SuccessCondition.PENDULUM_OSCILLATION:
+                case SuccessCondition.Condition.PENDULUM_OSCILLATION:
                     checkValue = counter.GetOscillations();
                     break;
-                case Level.SuccessCondition.TIME_PER_OSCILLATION:
+                case SuccessCondition.Condition.TIME_PER_OSCILLATION:
                     checkValue = timer.GetLatestTime();
                     break;
-                case Level.SuccessCondition.UNIQUE_WEIGHT_SELECTIONS:
+                case SuccessCondition.Condition.UNIQUE_WEIGHT_SELECTIONS:
+                    checkValue = weightSelector.GetUniqueWeightSelections().Count;
                     break;
             }
-        }
-        float minBound = level.conditionValue - level.conditionValueBounds;
-        float maxBound = level.conditionValue + level.conditionValueBounds;
 
-        if (checkValue > minBound && checkValue < maxBound)
-        {
-            SuccessConditionMet();
+            float minBound = condition.conditionValue - condition.boundMin;
+            float maxBound = condition.conditionValue + condition.boundMax;
+
+            if (checkValue < minBound || checkValue > maxBound)
+            {
+                returnVal = false;
+            }
         }
+        return returnVal;
     }
 
-    void SuccessConditionMet ()
+    void ClearLevel()
     {
         metSuccessCondition = true;
         GeneralEventHandler.current.SuccessConditionMet();

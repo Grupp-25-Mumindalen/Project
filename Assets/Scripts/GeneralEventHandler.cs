@@ -104,7 +104,7 @@ public class GeneralEventHandler : MonoBehaviour
     public event Action onCreatePendulum;
     public void CreatePendulum()
     {
-        if(onCreatePendulum != null)
+        if (onCreatePendulum != null)
         {
             onCreatePendulum();
         }
