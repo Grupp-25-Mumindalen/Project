@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: 0903919e0e5ad3c46b5bc7b34d571c07, type: 3}
+  - {fileID: 2100000, guid: 159eaabbe34a5c84c9e813084b980228, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -95,4 +95,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mass: 1
-  prototypeDamping: 0.3
+  prototypeDamping: 0.6
