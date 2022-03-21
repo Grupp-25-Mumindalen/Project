@@ -18,7 +18,6 @@ public class ARTapPlace : MonoBehaviour
     [SerializeField]
     private ARSession session;
     
-    private GameObject placedObject;
     private Pose placementPose; // Simple data structure that represents a 3D-point
     private ARSessionOrigin arOrigin;
     private ARRaycastManager rayCastMgr; // Needed to Raycast
@@ -34,6 +33,7 @@ public class ARTapPlace : MonoBehaviour
         session = FindObjectOfType<ARSession>();
         rayCastMgr = this.GetComponent<ARRaycastManager>();
         arPlaneMgr = this.GetComponent<ARPlaneManager>();
+        objToPlace.SetActive(false);
     }
 
     // Update is called once per frame
@@ -51,15 +51,17 @@ public class ARTapPlace : MonoBehaviour
     public void PlaceObject() {
 
         placementPose.position.y += (float)0.5;
-        placedObject = Instantiate(objToPlace, placementPose.position, placementPose.rotation);
+        objToPlace.SetActive(true);
+        objToPlace.transform.SetPositionAndRotation(placementPose.position, placementPose.rotation);
         active = true;
         DisablePlanes();
     }
 
-    /* NOT TESTED YET STILL IMPLEMENTING
+    /*  ResetAR()
+        Removes the placed experiment and enables planes again.
     */
     public void ResetAR() {
-        Destroy(placedObject); //or objTopPlace.SetActive(false);
+        objToPlace.SetActive(false);
         active = false;
         EnablePlanes();
     }
