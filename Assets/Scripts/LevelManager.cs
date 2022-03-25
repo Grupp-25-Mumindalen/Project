@@ -10,43 +10,12 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager current;
-    [System.Serializable]
-    public class Level
-    {
-        [Header("Constraints")]
-        public float airResistance = 1;
-        public float gravity = 0;
-        public bool is3D = true;
-        public bool canAdjustAngle = true;
-        public bool canAdjustLength = true;
-        public bool canAdjustWeight = true;
-        public bool canControlAirResistance = true;
-        public bool canControlGravity = true;
 
-        [Header("Success condition(s)")]
-        public SuccessCondition[] successConditions;
-    }
-    [System.Serializable]
-    public class SuccessCondition
-    {
-        public Condition successCondition;
-        public float conditionValue;
-        [Tooltip("How much the actual value is allowed to diverge below the conditionValue")]
-        public float boundMin;
-        [Tooltip("How much the actual value is allowed to diverge above the conditionValue")]
-        public float boundMax;
-        public enum Condition
-        {
-            PENDULUM_OSCILLATION,
-            TIME_PER_OSCILLATION,
-            UNIQUE_WEIGHT_SELECTIONS
-        }
-    }
 
     [SerializeField] private Level level;
     private bool metSuccessCondition = false;
     [SerializeField] private int levelIndex = 0;
-    [SerializeField] private List<Level> levels = new List<Level>();
+    [SerializeField] private LevelList levelList;
 
     private Timer timer;
     private OscillationCounter counter;
@@ -56,7 +25,7 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        level = levels[0];
+        level = levelList.levels[0];
         timer = this.GetComponent<Timer>();
         counter = this.GetComponent<OscillationCounter>();
         weightSelector = this.GetComponent<WeightSelector>();
@@ -102,18 +71,18 @@ public class LevelManager : MonoBehaviour
         {
             returnVal = false;
         }
-        foreach (SuccessCondition condition in level.successConditions)
+        foreach (Level.SuccessCondition condition in level.successConditions)
         {
             float checkValue = 0;
             switch (condition.successCondition)
             {
-                case SuccessCondition.Condition.PENDULUM_OSCILLATION:
+                case Level.SuccessCondition.Condition.PENDULUM_OSCILLATION:
                     checkValue = counter.GetOscillations();
                     break;
-                case SuccessCondition.Condition.TIME_PER_OSCILLATION:
+                case Level.SuccessCondition.Condition.TIME_PER_OSCILLATION:
                     checkValue = timer.GetLatestTime();
                     break;
-                case SuccessCondition.Condition.UNIQUE_WEIGHT_SELECTIONS:
+                case Level.SuccessCondition.Condition.UNIQUE_WEIGHT_SELECTIONS:
                     checkValue = weightSelector.GetUniqueWeightSelections().Count;
                     break;
             }
@@ -139,7 +108,7 @@ public class LevelManager : MonoBehaviour
     public void OnGoToNextLevel()
     {
         levelIndex += 1;
-        level = levels[levelIndex];
+        level = levelList.levels[levelIndex];
         SetConstraints();
         GeneralEventHandler.current.StopPendulumSimulation();
     }

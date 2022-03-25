@@ -128,34 +128,7 @@ MonoBehaviour:
     canControlGravity: 1
     successConditions: []
   levelIndex: 0
-  levels:
-  - airResistance: 0
-    gravity: 0
-    is3D: 0
-    canAdjustAngle: 1
-    canAdjustLength: 0
-    canAdjustWeight: 0
-    canControlAirResistance: 0
-    canControlGravity: 0
-    successConditions: []
-  - airResistance: 1
-    gravity: 0
-    is3D: 0
-    canAdjustAngle: 0
-    canAdjustLength: 0
-    canAdjustWeight: 0
-    canControlAirResistance: 0
-    canControlGravity: 0
-    successConditions: []
-  - airResistance: 0
-    gravity: 0
-    is3D: 0
-    canAdjustAngle: 0
-    canAdjustLength: 0
-    canAdjustWeight: 0
-    canControlAirResistance: 0
-    canControlGravity: 0
-    successConditions: []
+  levelList: {fileID: 11400000, guid: 9ef5a72804184dc4faee2ab81fe172cf, type: 2}
 --- !u!114 &1890229434658099239
 MonoBehaviour:
   m_ObjectHideFlags: 0
