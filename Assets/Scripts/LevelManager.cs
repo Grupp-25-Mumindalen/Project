@@ -107,6 +107,7 @@ public class LevelManager : MonoBehaviour
 
     public void OnGoToNextLevel()
     {
+        metSuccessCondition = false;
         levelIndex += 1;
         level = levelList.levels[levelIndex];
         SetConstraints();

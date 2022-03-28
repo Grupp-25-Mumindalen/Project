@@ -10,7 +10,7 @@ public class Level
     public string description;
 
     [Header("UI")]
-    public Sprite icon;
+    public Sprite icon; //Placeholder
 
     [Header("Constraints")]
     public float airResistance = 1;
