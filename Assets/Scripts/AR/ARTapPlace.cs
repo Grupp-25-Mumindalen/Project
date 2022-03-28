@@ -12,7 +12,7 @@ ARTapPlace handles the placement of the experiment, enable/disable planes and re
 public class ARTapPlace : MonoBehaviour
 {
     [SerializeField]
-    private GameObject placement;
+    public GameObject placement;
     [SerializeField]
     private GameObject objToPlace;
     [SerializeField]
@@ -34,6 +34,9 @@ public class ARTapPlace : MonoBehaviour
         rayCastMgr = this.GetComponent<ARRaycastManager>();
         arPlaneMgr = this.GetComponent<ARPlaneManager>();
         objToPlace.SetActive(false);
+
+        //GeneralEventHandler.current.onCreatePendulum += PlaceObject;
+        //GeneralEventHandler.current.onDestroyPendulum += ResetAR;
     }
 
     // Update is called once per frame
