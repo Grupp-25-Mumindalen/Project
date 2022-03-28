@@ -29,6 +29,7 @@ public class LengthHandler : MonoBehaviour
     {
         pendulum = PendulumManager.current;
         pendulumDistance = pendulum.GetPendulumDistance();
+        print(pendulumDistance);
         canAdjust = true;
     }
     private void OnDestroyPendulum()
