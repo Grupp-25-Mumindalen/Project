@@ -31,7 +31,6 @@ public class WeightSelector : MonoBehaviour
 
     private void OnCreatePendulum ()
     {
-        print("changeWeight");
         canDoSelection = true;
         pendulum = PendulumManager.current;
         ChangeWeight(0);

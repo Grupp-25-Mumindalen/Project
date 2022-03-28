@@ -203,13 +203,13 @@ public class PendulumManager : MonoBehaviour
 
     public float GetPendulumDistance()
     {
-        return -Mathf.Sign(pendulum.transform.position.y) * Vector2.Distance(transform.position, pendulum.transform.position);
+        return anchor.transform.localPosition.y;
     }
 
     public void SetPendulumDistance(float distance)
     {
         Vector3 v = anchor.transform.localPosition;
-        v.y = distance;
+        v.y = -Mathf.Abs(distance);
         anchor.transform.localPosition = v;
     }
 
