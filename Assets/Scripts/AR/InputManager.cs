@@ -30,40 +30,7 @@ public class InputManager : MonoBehaviour
             case 0:
             break;
             case 1:
-                touchPhase = Input.GetTouch(0).phase;
-                switch(touchPhase)
-                {
-                    case TouchPhase.Began:
-                        startingPos = touchPos.x;
-                        break;
-                    case TouchPhase.Moved:
-                        rotate = true;
-                        if(startingPos > touchPos.x)
-                        {
-                            pos.transform.Rotate(Vector3.down, -50f * Time.deltaTime);
-                        } else if(startingPos < touchPos.x)
-                        {
-                            pos.transform.Rotate(Vector3.down, 50f * Time.deltaTime);
-                        }
-                        rotate = false;
-                        break;
-                    case TouchPhase.Ended:
-                        if (!place.active && !rotate)
-                        {
-                            place.PlaceObject();
-                        }
-                        /* This should not be the primary way to Start/Stop Simulation.
-                        else if(!PendulumManager.isActive)
-                        {
-                            EventHandler.current.PendulumSimulationStart();
-                        }
-                        else
-                        {
-                            EventHandler.current.PendulumSimulationStop();
-                        }
-                        */
-                        break;
-                }
+                RotateOneTouch();
             break;
             case 2:
                 touchPhase = Input.GetTouch(0).phase;
@@ -74,6 +41,35 @@ public class InputManager : MonoBehaviour
             break;
             default:
             break;
+        }
+    }
+
+    private void RotateOneTouch()
+    {
+        touchPhase = Input.GetTouch(0).phase;
+        switch (touchPhase)
+        {
+            case TouchPhase.Began:
+                startingPos = touchPos.x;
+                break;
+            case TouchPhase.Moved:
+                rotate = true;
+                if (startingPos > touchPos.x)
+                {
+                    pos.transform.Rotate(Vector3.down, -50f * Time.deltaTime);
+                }
+                else if (startingPos < touchPos.x)
+                {
+                    pos.transform.Rotate(Vector3.down, 50f * Time.deltaTime);
+                }
+                rotate = false;
+                break;
+            case TouchPhase.Ended:
+                if (!place.active && !rotate)
+                {
+                    place.PlaceObject();
+                }
+                break;
         }
     }
 }
