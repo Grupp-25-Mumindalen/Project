@@ -10,6 +10,7 @@ public class Menu : MonoBehaviour
     public GameObject menuPanel;
     public GameObject challengemenu;
     public GameObject challenge1;
+    public GameObject exitconfirmation;
 
     public void openMenu(){
         if(!menuPanel.active){
@@ -29,5 +30,14 @@ public class Menu : MonoBehaviour
     }
     public void showCurrentChallenge(){
       challenge1.SetActive(true);
+    }
+    public void openexitmenu(){
+      exitconfirmation.SetActive(true);
+    }
+    public void exitgame(){
+
+    }
+    public void continuegame(){
+      exitconfirmation.SetActive(false);
     }
 }
