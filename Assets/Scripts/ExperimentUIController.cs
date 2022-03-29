@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class ExperimentUIController : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class ExperimentUIController : MonoBehaviour
     public void Start()
     {
         if (!menu)
-            Debug.LogError("No menu has been provided");
+            Debug.LogError("No Menu has been provided to UI-control. Assign a Menu-reference ASAP. Come on, " + Environment.UserName + ", you can do this");
         current = this;
     }
 
