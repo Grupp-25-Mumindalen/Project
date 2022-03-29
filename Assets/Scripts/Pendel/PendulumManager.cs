@@ -39,7 +39,6 @@ public class PendulumManager : MonoBehaviour
         GeneralEventHandler.current.onPendulumSimulationStart += OnStartSimulation;
         GeneralEventHandler.current.onPendulumSimulationStop += OnStopSimulation;
         ResetPendulum();
-        SetPendulum2DRotation(defaultAngle);
     }
 
     private void OnDestroy()
@@ -62,7 +61,6 @@ public class PendulumManager : MonoBehaviour
     {
         SetPendulumActivity(false);
         ResetPendulum();
-        SetPendulum2DRotation(defaultAngle);
     }
 
     public void SetPendulum2DRotation(float angle)
