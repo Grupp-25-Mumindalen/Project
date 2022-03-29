@@ -7,7 +7,9 @@ public class Level
 {
     [Header("General information")]
     public string name;
-    public string description;
+    public string challenge;
+    public string hint;
+    public string successMessage;
 
     [Header("UI")]
     public Sprite icon; //Placeholder
@@ -42,7 +44,10 @@ public class Level
         {
             PENDULUM_OSCILLATION,
             TIME_PER_OSCILLATION,
-            UNIQUE_WEIGHT_SELECTIONS
+            UNIQUE_WEIGHT_SELECTIONS,
+            SHORTER_LENGTH,
+            LONGER_LENGTH
+
         }
     }
 }

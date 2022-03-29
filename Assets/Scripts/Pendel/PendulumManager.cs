@@ -11,6 +11,7 @@ public class PendulumManager : MonoBehaviour
     private bool is3D = false;
     private Vector3 gravity;
     private float armLength;
+    private float formerLength;
     private float objectMass;
     private float objectDrag;
     private float objectArea;
@@ -227,6 +228,16 @@ public class PendulumManager : MonoBehaviour
     public Vector3 GetAnchorPosition()
     {
         return anchor.transform.position;
+    }
+
+    public float getFormerLength()
+    {
+        return formerLength;
+    }
+
+    public float getArmLength()
+    {
+        return armLength;
     }
 
     public void SetAirResistance(float resistance)
