@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 551109207575343453}
   - component: {fileID: 1890229434658099240}
   - component: {fileID: 1493541208461854561}
+  - component: {fileID: 3615101743391527618}
   m_Layer: 0
   m_Name: p_EventHandler
   m_TagString: Untagged
@@ -129,6 +130,8 @@ MonoBehaviour:
     canAdjustWeight: 1
     canControlAirResistance: 1
     canControlGravity: 1
+    isTimed: 1
+    clearTimesOnSimulationStop: 1
     successConditions: []
   levelIndex: 0
   levelList: {fileID: 11400000, guid: 9ef5a72804184dc4faee2ab81fe172cf, type: 2}
@@ -144,3 +147,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 349c661c74b801a4eb33cf92e52ceaeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiController: {fileID: 3615101743391527618}
+--- !u!114 &3615101743391527618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890229434658099241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f159a7ca36879e4881edf6b91490f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menu: {fileID: 0}
