@@ -46,6 +46,6 @@ MonoBehaviour:
       boundMin: 0.5
       boundMax: 0.5
     - successCondition: 2
-      conditionValue: 1
+      conditionValue: 3
       boundMin: 0.5
       boundMax: 0.5

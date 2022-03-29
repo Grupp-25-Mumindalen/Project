@@ -118,4 +118,13 @@ public class GeneralEventHandler : MonoBehaviour
             onDestroyPendulum();
         }
     }
+
+    public event Action onNextLevelLoaded;
+    public void NextLevelLoaded ()
+    {
+        if(onNextLevelLoaded != null)
+        {
+            onNextLevelLoaded();
+        }
+    }
 }

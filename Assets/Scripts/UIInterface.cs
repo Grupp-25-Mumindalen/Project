@@ -3,27 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(LevelManager))]
-public class UI_Interface : MonoBehaviour
+[DefaultExecutionOrder(-700)]
+public class UIInterface : MonoBehaviour
 {
-    LengthHandler lengthHandler;
-    Timer timer;
-    WeightSelector weightSelector;
-    PendulumManager pendulumManager;
+    private LevelManager levelManager;
+    private LengthHandler lengthHandler;
+    private Timer timer;
+    private WeightSelector weightSelector;
+    private PendulumManager pendulumManager;
+    [SerializeField] private ExperimentUIController uiController;
+    
 
     private bool simulating = false;
     private void Start()
     {
+        if (!uiController)
+            Debug.LogError("No UI controller assigned.");
+        else
+            uiController.SetInterface(this);
+        levelManager = LevelManager.current;
         lengthHandler = GetComponent<LengthHandler>();
         timer = GetComponent<Timer>();
         weightSelector = GetComponent<WeightSelector>();
         GeneralEventHandler.current.onPendulumSimulationStart += OnStartSimulation;
         GeneralEventHandler.current.onPendulumSimulationStop += OnStopSimulation;
+        GeneralEventHandler.current.onNextLevelLoaded += OnNextLevelLoaded;
     }
 
     private void OnDestroy()
     {
         GeneralEventHandler.current.onPendulumSimulationStart -= OnStartSimulation;
         GeneralEventHandler.current.onPendulumSimulationStop -= OnStopSimulation;
+        GeneralEventHandler.current.onNextLevelLoaded -= OnNextLevelLoaded;
     }
 
     private void Update()
@@ -33,6 +44,8 @@ public class UI_Interface : MonoBehaviour
             pendulumManager = PendulumManager.current;
         }
     }
+
+
 
     public void TogglePendulumSimulation()
     {
@@ -60,13 +73,18 @@ public class UI_Interface : MonoBehaviour
 
 
 
-
+    
 
 
 
 
 
     //Handling of events
+    private void OnNextLevelLoaded()
+    {
+        Level level = levelManager.GetLevel();
+        uiController.LoadLevelUI(level);
+    }
     private void OnStartSimulation ()
     {
         simulating = true;

@@ -11,7 +11,6 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager current;
 
-
     [SerializeField] private Level level;
     private bool metSuccessCondition = false;
     [SerializeField] private int levelIndex = 0;
@@ -25,10 +24,12 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        current = this;
         level = levelList.levels[0];
         timer = this.GetComponent<Timer>();
         counter = this.GetComponent<OscillationCounter>();
         weightSelector = this.GetComponent<WeightSelector>();
+        GeneralEventHandler.current.NextLevelLoaded();
         GeneralEventHandler.current.onGoToNextLevel += OnGoToNextLevel;
         GeneralEventHandler.current.onCreatePendulum += OnCreatePendulum;
         GeneralEventHandler.current.onDestroyPendulum += OnDestroyPendulum;
@@ -109,9 +110,18 @@ public class LevelManager : MonoBehaviour
     {
         metSuccessCondition = false;
         levelIndex += 1;
-        level = levelList.levels[levelIndex];
+        if (levelList.levels[levelIndex] != null)
+            level = levelList.levels[levelIndex];
+        else
+            Debug.LogError("Tried going to a null level. Ascertain that the last level in the list has no success conditions.");
         SetConstraints();
         GeneralEventHandler.current.StopPendulumSimulation();
+        GeneralEventHandler.current.NextLevelLoaded();
+    }
+
+    public Level GetLevel ()
+    {
+        return level;
     }
 
     public void SetConstraints()
