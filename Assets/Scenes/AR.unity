@@ -961,7 +961,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1821405575}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: WeightSelector, Assembly-CSharp
         m_MethodName: ChangeWeight
         m_Mode: 3
@@ -1132,7 +1132,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1821405575}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: WeightSelector, Assembly-CSharp
         m_MethodName: ChangeWeight
         m_Mode: 3
@@ -1504,11 +1504,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1821405568}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a88001747f2eb24694693abbf74a344, type: 3}
+  m_Script: {fileID: 11500000, guid: cc5f94d59f14e124ea90d70ab9943f6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weightList: {fileID: 11400000, guid: a2238c069dc9d2946a553b391f61d846, type: 2}
-  uniqueSelections: 
+  m_button: {fileID: 1957553139}
 --- !u!1 &1957553137
 GameObject:
   m_ObjectHideFlags: 0
