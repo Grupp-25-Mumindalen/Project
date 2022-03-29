@@ -12,4 +12,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9dc330f9459504382221f296901379, type: 3}
   m_Name: LevelList
   m_EditorClassIdentifier: 
-  levels: []
+  levels:
+  - name: Level Wan
+    description: 
+    icon: {fileID: 0}
+    airResistance: 0
+    gravity: 0
+    is3D: 0
+    canAdjustAngle: 0
+    canAdjustLength: 0
+    canAdjustWeight: 0
+    canControlAirResistance: 0
+    canControlGravity: 0
+    successConditions:
+    - successCondition: 0
+      conditionValue: 3
+      boundMin: 0.5
+      boundMax: 0.5
+  - name: Lerbnrel tgvo
+    description: 
+    icon: {fileID: 0}
+    airResistance: 0
+    gravity: 0
+    is3D: 0
+    canAdjustAngle: 0
+    canAdjustLength: 0
+    canAdjustWeight: 0
+    canControlAirResistance: 0
+    canControlGravity: 0
+    successConditions:
+    - successCondition: 0
+      conditionValue: 3
+      boundMin: 0.5
+      boundMax: 0.5
+    - successCondition: 2
+      conditionValue: 3
+      boundMin: 0.5
+      boundMax: 0.5

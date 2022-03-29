@@ -22,6 +22,10 @@ public class Level
     public bool canControlAirResistance = true;
     public bool canControlGravity = true;
 
+    [Header("Special parameters")]
+    public bool isTimed = true;
+    public bool clearTimesOnSimulationStop = true;
+
     [Header("Success condition(s)")]
     public SuccessCondition[] successConditions;
 

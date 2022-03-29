@@ -5,8 +5,9 @@ using UnityEngine;
 public class PendulumManager : MonoBehaviour
 {
     public static PendulumManager current;
-    [SerializeField] private GameObject pendulum;
+    private GameObject pendulum;
     [SerializeField] private GameObject anchor;
+    [SerializeField] private float defaultAngle = -50;
     private bool is3D = false;
     private Vector3 gravity;
     private float armLength;
@@ -15,18 +16,18 @@ public class PendulumManager : MonoBehaviour
     private float objectArea;
     private float prototypeDamp;
     private static float simulationSpeed = 200;
-    [SerializeField] int formerDirection = 0;
-    [SerializeField] int formerSpeedDirection = 0;
+    [SerializeField] private int formerDirection = 0;
+    [SerializeField] private int formerSpeedDirection = 0;
 
-    [SerializeField] float angularVelocity = 0;
-    [SerializeField] float acceleration = 0;
-    [SerializeField] float pendulumAngle;
+    private float angularVelocity = 0;
+    private float acceleration = 0;
+    private float pendulumAngle;
 
     private int phaseCounter = 0;
 
-    [SerializeField] private bool initializedDirections = false;
-    [SerializeField] private bool isActive = false;
-    [SerializeField] private float dragScale = 0;
+    private bool initializedDirections = false;
+    private bool isActive = false;
+    private float dragScale = 0;
 
     private void Start()
     {
@@ -37,6 +38,8 @@ public class PendulumManager : MonoBehaviour
         GeneralEventHandler.current.CreatePendulum();
         GeneralEventHandler.current.onPendulumSimulationStart += OnStartSimulation;
         GeneralEventHandler.current.onPendulumSimulationStop += OnStopSimulation;
+        ResetPendulum();
+        SetPendulum2DRotation(defaultAngle);
     }
 
     private void OnDestroy()
@@ -58,6 +61,15 @@ public class PendulumManager : MonoBehaviour
     public void OnStopSimulation()
     {
         SetPendulumActivity(false);
+        ResetPendulum();
+        SetPendulum2DRotation(defaultAngle);
+    }
+
+    public void SetPendulum2DRotation(float angle)
+    {
+        pendulumAngle = angle;
+        Quaternion q = Quaternion.Euler(0, 0, pendulumAngle);
+        transform.rotation = q;
     }
 
     public void ChangeWeight(GameObject newObject)
@@ -109,6 +121,7 @@ public class PendulumManager : MonoBehaviour
         angularVelocity = 0;
         formerDirection = 0;
         formerSpeedDirection = 0;
+        phaseCounter = 0;
     }
 
     // Update is called once per frame
@@ -203,13 +216,13 @@ public class PendulumManager : MonoBehaviour
 
     public float GetPendulumDistance()
     {
-        return -Mathf.Sign(pendulum.transform.position.y) * Vector2.Distance(transform.position, pendulum.transform.position);
+        return anchor.transform.localPosition.y;
     }
 
     public void SetPendulumDistance(float distance)
     {
         Vector3 v = anchor.transform.localPosition;
-        v.y = distance;
+        v.y = -Mathf.Abs(distance);
         anchor.transform.localPosition = v;
     }
 
