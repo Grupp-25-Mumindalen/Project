@@ -9,7 +9,8 @@ public class ExperimentUIController : MonoBehaviour
     public static ExperimentUIController current;
     private UIInterface uiInterface;
     [SerializeField] private Menu menu;
-    
+    [SerializeField] private Text challengeTitle;
+
 
 
     public void Start()
@@ -26,6 +27,7 @@ public class ExperimentUIController : MonoBehaviour
 
     public void LoadLevelUI(Level level)
     {
+        challengeTitle.text = level.name;
         throw new System.Exception("not implemented");
 
     }
