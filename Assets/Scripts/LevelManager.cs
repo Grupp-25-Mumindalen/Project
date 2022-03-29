@@ -81,6 +81,8 @@ public class LevelManager : MonoBehaviour
         foreach (Level.SuccessCondition condition in level.successConditions)
         {
             float checkValue = 0;
+            float minBound = condition.conditionValue - condition.boundMin;
+            float maxBound = condition.conditionValue + condition.boundMax;
             switch (condition.successCondition)
             {
                 case Level.SuccessCondition.Condition.PENDULUM_OSCILLATION:
@@ -92,10 +94,17 @@ public class LevelManager : MonoBehaviour
                 case Level.SuccessCondition.Condition.UNIQUE_WEIGHT_SELECTIONS:
                     checkValue = weightSelector.GetUniqueWeightSelections().Count;
                     break;
+                case Level.SuccessCondition.Condition.LONGER_LENGTH:
+                    checkValue = PendulumManager.current.getArmLength() - PendulumManager.current.getFormerLength(); //!!!
+                    minBound = 0f;
+                    maxBound = 10000f;
+                    break;
+                case Level.SuccessCondition.Condition.SHORTER_LENGTH:
+                    checkValue = PendulumManager.current.getFormerLength() - PendulumManager.current.getArmLength(); //!!!
+                    minBound = 0f;
+                    maxBound = 10000f;
+                    break;
             }
-
-            float minBound = condition.conditionValue - condition.boundMin;
-            float maxBound = condition.conditionValue + condition.boundMax;
 
             if (checkValue < minBound || checkValue > maxBound)
             {
