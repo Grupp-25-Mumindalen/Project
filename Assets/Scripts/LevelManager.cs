@@ -109,7 +109,7 @@ public class LevelManager : MonoBehaviour
     {
         metSuccessCondition = true;
         GeneralEventHandler.current.SuccessConditionMet();
-        OnGoToNextLevel();
+      
     }
 
     public void OnGoToNextLevel()

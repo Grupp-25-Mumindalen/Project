@@ -12,7 +12,7 @@ public class UIInterface : MonoBehaviour
     private WeightSelector weightSelector;
     private PendulumManager pendulumManager;
     [SerializeField] private ExperimentUIController uiController;
-    
+
 
     private bool simulating = false;
     private void Start()
@@ -28,6 +28,7 @@ public class UIInterface : MonoBehaviour
         GeneralEventHandler.current.onPendulumSimulationStart += OnStartSimulation;
         GeneralEventHandler.current.onPendulumSimulationStop += OnStopSimulation;
         GeneralEventHandler.current.onNextLevelLoaded += OnNextLevelLoaded;
+        GeneralEventHandler.current.onSuccessConditionMet += OnSuccessConditionMet;
     }
 
     private void OnDestroy()
@@ -35,6 +36,7 @@ public class UIInterface : MonoBehaviour
         GeneralEventHandler.current.onPendulumSimulationStart -= OnStartSimulation;
         GeneralEventHandler.current.onPendulumSimulationStop -= OnStopSimulation;
         GeneralEventHandler.current.onNextLevelLoaded -= OnNextLevelLoaded;
+        GeneralEventHandler.current.onSuccessConditionMet -= OnSuccessConditionMet;
     }
 
     private void Update()
@@ -73,7 +75,7 @@ public class UIInterface : MonoBehaviour
 
 
 
-    
+
 
 
 
@@ -84,6 +86,10 @@ public class UIInterface : MonoBehaviour
     {
         Level level = levelManager.GetLevel();
         uiController.LoadLevelUI(level);
+    }
+    private void OnSuccessConditionMet()
+    {
+        uiController.ClearLevel();
     }
     private void OnStartSimulation ()
     {

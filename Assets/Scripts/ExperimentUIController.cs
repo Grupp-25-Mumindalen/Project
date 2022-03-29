@@ -13,7 +13,7 @@ public class ExperimentUIController : MonoBehaviour
     [SerializeField] private Text success;
     [SerializeField] private GameObject changeweight;
     [SerializeField] private GameObject changelength;
-
+    [SerializeField] private GameObject nextlevel;
 
 
     public void Start()
@@ -73,4 +73,14 @@ public class ExperimentUIController : MonoBehaviour
     {
 
     }
+    public void ClearLevel ()
+    {
+       nextlevel.SetActive(true);
+    }
+    public void NextLevel()
+    {
+      nextlevel.SetActive(false);
+      GeneralEventHandler.current.GoToNextLevel();
+    }
+
 }
