@@ -10,11 +10,20 @@ public class UI_Interface : MonoBehaviour
     WeightSelector weightSelector;
     PendulumManager pendulumManager;
 
+    private bool simulating = false;
     private void Start()
     {
         lengthHandler = GetComponent<LengthHandler>();
         timer = GetComponent<Timer>();
         weightSelector = GetComponent<WeightSelector>();
+        GeneralEventHandler.current.onPendulumSimulationStart += OnStartSimulation;
+        GeneralEventHandler.current.onPendulumSimulationStop += OnStopSimulation;
+    }
+
+    private void OnDestroy()
+    {
+        GeneralEventHandler.current.onPendulumSimulationStart -= OnStartSimulation;
+        GeneralEventHandler.current.onPendulumSimulationStop -= OnStopSimulation;
     }
 
     private void Update()
@@ -25,13 +34,12 @@ public class UI_Interface : MonoBehaviour
         }
     }
 
-    public void StartPendulum()
+    public void TogglePendulumSimulation()
     {
-        GeneralEventHandler.current.StartPendulumSimulation();
-    }
-    public void StopPendulum()
-    {
-        GeneralEventHandler.current.StopPendulumSimulation();
+        if(!simulating)
+            GeneralEventHandler.current.StartPendulumSimulation();
+        else
+            GeneralEventHandler.current.StopPendulumSimulation();
     }
     public void AdjustPendulumLength(float length)
     {
@@ -47,5 +55,24 @@ public class UI_Interface : MonoBehaviour
         {
             weightSelector.ChangeWeight(weightID);
         }
+    }
+
+
+
+
+
+
+
+
+
+
+    //Handling of events
+    private void OnStartSimulation ()
+    {
+        simulating = true;
+    }
+    private void OnStopSimulation ()
+    {
+        simulating = false;
     }
 }
