@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1516170521312624735}
   - component: {fileID: 3669996398705833109}
   - component: {fileID: 360439401420905834}
+  - component: {fileID: -6006798600032877130}
   m_Layer: 7
   m_Name: box_o_milk
   m_TagString: Untagged
@@ -96,3 +97,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mass: 1
   prototypeDamping: 0.6
+--- !u!65 &-6006798600032877130
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3021508769059001664}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9999999, y: 1.6736895, z: 1.64644}
+  m_Center: {x: 0, y: 0, z: 0.40556595}

@@ -1961,7 +1961,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Objelt2
+  m_Text: Donut
 --- !u!222 &909557084
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3248,7 +3248,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Objelt3
+  m_Text: Isak
 --- !u!222 &1443218825
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4227,7 +4227,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Objelt2
+  m_Text: Milk
 --- !u!222 &1710047788
 CanvasRenderer:
   m_ObjectHideFlags: 0
