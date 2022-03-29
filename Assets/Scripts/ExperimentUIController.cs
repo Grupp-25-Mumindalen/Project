@@ -10,6 +10,9 @@ public class ExperimentUIController : MonoBehaviour
     private UIInterface uiInterface;
     [SerializeField] private Menu menu;
     [SerializeField] private Text challengeTitle;
+    [SerializeField] private Text success;
+    [SerializeField] private GameObject changeweight;
+    [SerializeField] private GameObject changelength;
 
 
 
@@ -28,7 +31,9 @@ public class ExperimentUIController : MonoBehaviour
     public void LoadLevelUI(Level level)
     {
         challengeTitle.text = level.name;
-        throw new System.Exception("not implemented");
+      //  success.text= level.successmessage; //Rätt namn
+        ToggleElement(changeweight, level.canAdjustWeight);
+        ToggleElement(changelength, level.canAdjustLength);
 
     }
 
@@ -63,7 +68,7 @@ public class ExperimentUIController : MonoBehaviour
     {
 
     }
-    
+
     public void DisplayLevelSwitch()
     {
 
