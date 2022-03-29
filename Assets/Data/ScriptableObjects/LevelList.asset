@@ -109,7 +109,7 @@ MonoBehaviour:
       boundMin: 0.5
       boundMax: 0.5
     - successCondition: 2
-      conditionValue: 2
+      conditionValue: 3
       boundMin: 0.5
       boundMax: 0.5
   - name: "Luftmotst\xE5nd"
