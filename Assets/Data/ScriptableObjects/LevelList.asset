@@ -13,39 +13,95 @@ MonoBehaviour:
   m_Name: LevelList
   m_EditorClassIdentifier: 
   levels:
-  - name: Level Wan
-    description: 
+  - name: Intro
+    challenge: "F\xE5 pendeln att svinga!"
+    hint: "Vad h\xE4nder om du drar i pendeln?"
+    successMessage: Bra jobbat!
     icon: {fileID: 0}
     airResistance: 0
     gravity: 0
     is3D: 0
-    canAdjustAngle: 0
+    canAdjustAngle: 1
     canAdjustLength: 0
     canAdjustWeight: 0
     canControlAirResistance: 0
     canControlGravity: 0
+    isTimed: 1
+    clearTimesOnSimulationStop: 1
     successConditions:
     - successCondition: 0
       conditionValue: 3
       boundMin: 0.5
       boundMax: 0.5
-  - name: Lerbnrel tgvo
-    description: 
+  - name: "\xC4ndra l\xE4ngd (l\xE4ngre)"
+    challenge: "G\xF6r pendeln l\xE4ngre och svinga den igen!"
+    hint: "\xC4ndra l\xE4ngden med hj\xE4lp av knapparna och s\xE4tt ig\xE5ng pendeln"
+    successMessage: "M\xE4rkte du att n\xE5got \xE4ndrades?"
     icon: {fileID: 0}
     airResistance: 0
     gravity: 0
     is3D: 0
-    canAdjustAngle: 0
-    canAdjustLength: 0
+    canAdjustAngle: 1
+    canAdjustLength: 1
     canAdjustWeight: 0
     canControlAirResistance: 0
     canControlGravity: 0
+    isTimed: 1
+    clearTimesOnSimulationStop: 1
     successConditions:
     - successCondition: 0
       conditionValue: 3
       boundMin: 0.5
       boundMax: 0.5
-    - successCondition: 2
+    - successCondition: 4
+      conditionValue: 3
+      boundMin: 0.5
+      boundMax: 0.5
+  - name: "\xC4ndra l\xE4ngd (l\xE4ngre)"
+    challenge: "G\xF6r pendeln l\xE4ngre och svinga den igen!"
+    hint: "\xC4ndra l\xE4ngden med hj\xE4lp av knapparna och s\xE4tt ig\xE5ng pendeln"
+    successMessage: "M\xE4rkte du att n\xE5got \xE4ndrades?"
+    icon: {fileID: 0}
+    airResistance: 0
+    gravity: 0
+    is3D: 0
+    canAdjustAngle: 1
+    canAdjustLength: 1
+    canAdjustWeight: 0
+    canControlAirResistance: 0
+    canControlGravity: 0
+    isTimed: 1
+    clearTimesOnSimulationStop: 1
+    successConditions:
+    - successCondition: 0
+      conditionValue: 3
+      boundMin: 0.5
+      boundMax: 0.5
+    - successCondition: 4
+      conditionValue: 3
+      boundMin: 0.5
+      boundMax: 0.5
+  - name: "\xC4ndra l\xE4ngd (l\xE4ngre)"
+    challenge: "G\xF6r pendeln l\xE4ngre och svinga den igen!"
+    hint: "\xC4ndra l\xE4ngden med hj\xE4lp av knapparna och s\xE4tt ig\xE5ng pendeln"
+    successMessage: "M\xE4rkte du att n\xE5got \xE4ndrades?"
+    icon: {fileID: 0}
+    airResistance: 0
+    gravity: 0
+    is3D: 0
+    canAdjustAngle: 1
+    canAdjustLength: 1
+    canAdjustWeight: 0
+    canControlAirResistance: 0
+    canControlGravity: 0
+    isTimed: 1
+    clearTimesOnSimulationStop: 1
+    successConditions:
+    - successCondition: 0
+      conditionValue: 3
+      boundMin: 0.5
+      boundMax: 0.5
+    - successCondition: 4
       conditionValue: 3
       boundMin: 0.5
       boundMax: 0.5
