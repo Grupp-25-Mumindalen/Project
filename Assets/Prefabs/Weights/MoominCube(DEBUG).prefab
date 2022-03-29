@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 7169790378622534307}
   - component: {fileID: 4031110778623545156}
   - component: {fileID: -1596387576990099377}
-  m_Layer: 0
-  m_Name: IsakCube(DEBUG)
+  m_Layer: 7
+  m_Name: MoominCube(DEBUG)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

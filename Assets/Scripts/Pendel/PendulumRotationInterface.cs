@@ -5,123 +5,118 @@ using UnityEngine;
 public class PendulumRotationInterface : MonoBehaviour
 {
     private Camera _camera;
-    private float firstHitPosX;
-    private float firstHitPosY;
-
-    private float direction;
-    private int change = 0;
-
-    [SerializeField] int incrementSize = 10; // in angles
-    [SerializeField] int maxIncrements = 10; // before change direction
+    private bool dragging = false;
+    private Vector3 touchPrevPos;
+    private Vector3 touchPos;
+    private float curRot; 
+    private float diff;
+    private int inFront;
+    private Pose cameraAngle;
+    private GameObject pendulum;
+    private float angleDiff;
 
     void Start()
     {
-        direction = 1;
         _camera = Camera.main;
+        pendulum = this.transform.parent.gameObject; //Necessary for evaluating the angle of the pendulum
+        inFront = 1;
     }
 
     void Update()
     {
-
-#if UNITY_EDITOR
-        EditorTouch();
+    #if UNITY_EDITOR
+        EditorTouchEval();
         return;
-#endif
+    #endif
+        TouchEval();
+    }
 
-        // One finger
+    // TouchEval evaluates dragging touch inputs in interaction with the weight
+    private void TouchEval()
+    {
         if (Input.touchCount == 1)
         {
-
-            // Tap on Object
-            // if (Input.GetTouch(0).phase == TouchPhase.Began)
-            if (Input.GetTouch(0).phase == TouchPhase.Began)
+            Touch touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began)
             {
-                Ray ray = _camera.ScreenPointToRay(Input.GetTouch(0).position);
+                //Creates a ray at the position of the touch
+                touchPos = touch.position;
+                Ray ray = _camera.ScreenPointToRay(touchPos);
                 RaycastHit hit;
 
-                // !!! I WILL MURDER SOMEONE IF I CHANGE THIS INSTEAD OF EDITOR VERSION AGAIN AND SPEND
-                // 20 MIN SEARCHING FOR ANSWERS THAT GOD IS NOT WILLING TO GIVE ME
-                // (meaning this if-statement is basically going to be the edit one copy pasted but its not here rn)
-            }
-
-            // Release
-            if (Input.GetTouch(0).phase == TouchPhase.Ended)
-            {
-            }
-        }
-    }
-
-    private void EditorTouch()
-    {
-        // One finger
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 1000.0f, LayerMask.GetMask("Surface")))
-            {
-                if (hit.transform == hit.transform)
+                if (Physics.Raycast(ray, out hit, 1000.0f, LayerMask.GetMask("Weight"))) //Using the ray, ensures the user pressed the weight
                 {
-                    firstHitPosX = transform.position.x;
-                    // firstHitPosY = transform.position.y;
-
-                    // increment one step
-                    Move();
-
-                    // change direction each time
-                    // change direction uuh sometimes
-                        if (change == maxIncrements)
-                        {
-                            direction = -direction;
-                            change = 0;
-                            Debug.Log("Direction changed");
-                        } else {
-                            change = change + 1;
-                        }
-                    ;
+                    dragging = true; 
+                    touchPrevPos = touchPos;
                 }
             }
-        }
-
-        // Release
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetTouch(0).phase == TouchPhase.Ended)
             {
+                dragging = false;
+            }
+            if (dragging) //Only rotates the pendulum if the screen is currently being touched
+            {
+                //Retrieves the camera rotation
+                var cameraForward = _camera.transform.forward;
+                var cameraBearing = new Vector3(cameraForward.x, 0, cameraForward.z).normalized;
+                cameraAngle.rotation = Quaternion.LookRotation(cameraBearing);
+
+                //Compares the rotation of the camera and pendulum to establish whether the user is in front of or behind the pendulum
+                angleDiff = Mathf.Abs(cameraAngle.rotation.eulerAngles.y - pendulum.transform.rotation.eulerAngles.y);  
+                if (angleDiff < 90 || angleDiff > 270) //The user is facing the front of the pendulum
+                    inFront = 1;
+                else //The user is facing the back of the pendulum
+                    inFront = -1; 
+
+                touchPos = touch.position;
+                Move();
             }
         }
-
-    private float _moved = 0.0f;
-
-    void Move()
-    {
-#if UNITY_EDITOR
-        EditorMove();
-        return;
-#endif
-
-        RaycastHit hit;
-        Ray ray = _camera.ScreenPointToRay(Input.GetTouch(0).position);
-
-        // !!! implement rest of fn exactly as EditorMove
     }
 
-    void EditorMove()
+    // EditorTouch evaluates dragging mouse inputs in interaction with the weight
+    private void EditorTouchEval()
     {
-        RaycastHit hit;
-        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-         if (direction > 0) {
-                transform.rotation = transform.rotation * Quaternion.Euler(0, 0, incrementSize);
-            } else {
-                transform.rotation = transform.rotation * Quaternion.Euler(0, 0, -incrementSize);
-            }
-
-            /*
-        if (Physics.Raycast(ray, out hit, 300.0f))
+        if (Input.GetMouseButtonDown(0))
         {
-            if (direction > 0) {
-                transform.rotation = Quaternion.Euler(0, 0, transform.rotation.z + 10);
-            } else {
-                transform.rotation = Quaternion.Euler(0, 0, transform.rotation.z -10);
+            //Creates a ray at the position of the click
+            touchPos = Input.mousePosition;
+            Ray ray = _camera.ScreenPointToRay(touchPos);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, 1000.0f, LayerMask.GetMask("Weight"))) //Using the ray, ensures the user pressed the weight
+            {
+                dragging = true;
+                touchPrevPos = touchPos;
             }
-        }*/
+        }
+        if(Input.GetMouseButtonUp(0))
+        {
+            dragging = false;
+        }
+        if(dragging) //Only rotates the pendulum if the button is currently being pressed
+        {
+            touchPos = Input.mousePosition;
+            Move();
+        }
+    }
+
+    // Move rotates the pendulum in accordance with the touch/mouse input
+    private void Move()
+    { 
+        // Evaluates the change in position of the touch/mouse input
+        // If the user is standing behind the pendulum, the movement is inversed to match the direction of the touch/mouse input. (InFront = 1 if the user is in front of the pendulum, -1 otherwise)
+        diff = inFront*(touchPos.x - touchPrevPos.x)/10;
+
+        //Retrieves the current rotation of the pendulum
+        curRot = transform.rotation.eulerAngles.z;
+
+        // The following if statement restricts rotation to 90 degrees (in either direction) from the rest state of the pendulum
+        if ((curRot > 270 || curRot < 90 || (curRot > 90 && curRot < 180 && diff < 0) || (curRot < 270 && curRot > 180 && diff > 0)))
+        {
+            // Rotates the pendulum in accordance with the movement of the touch/mouse input
+            transform.rotation = transform.rotation * Quaternion.Euler(0, 0, diff);
+            touchPrevPos = touchPos;
+        }
     }
 }
