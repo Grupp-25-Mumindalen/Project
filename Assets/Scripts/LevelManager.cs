@@ -29,10 +29,16 @@ public class LevelManager : MonoBehaviour
         timer = this.GetComponent<Timer>();
         counter = this.GetComponent<OscillationCounter>();
         weightSelector = this.GetComponent<WeightSelector>();
-        GeneralEventHandler.current.NextLevelLoaded();
         GeneralEventHandler.current.onGoToNextLevel += OnGoToNextLevel;
         GeneralEventHandler.current.onCreatePendulum += OnCreatePendulum;
         GeneralEventHandler.current.onDestroyPendulum += OnDestroyPendulum;
+        StartCoroutine(SetUpLevelLoad());
+    }
+
+    private IEnumerator SetUpLevelLoad()
+    {
+      yield return new WaitForEndOfFrame();
+      GeneralEventHandler.current.NextLevelLoaded();
     }
 
     private void OnDestroy()
@@ -131,5 +137,3 @@ public class LevelManager : MonoBehaviour
         pendulum.Toggle3D(level.is3D);
     }
 }
-
-
