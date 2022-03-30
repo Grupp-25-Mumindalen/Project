@@ -21,7 +21,7 @@ MonoBehaviour:
     m_SerializedTextureGuid:
       m_GuidLow: 16975310093327593052
       m_GuidHigh: 15385737408047197736
-    m_Size: {x: 1, y: 1.1151241}
+    m_Size: {x: 0.1, y: 0.111512415}
     m_SpecifySize: 1
     m_Name: Dotted-Indicator
     m_Texture: {fileID: 0}
