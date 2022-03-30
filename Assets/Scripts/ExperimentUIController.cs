@@ -30,8 +30,8 @@ public class ExperimentUIController : MonoBehaviour
 
     public void LoadLevelUI(Level level)
     {
-        challengeTitle.text = level.name;
-      //  success.text= level.successmessage; //Rätt namn
+        challengeTitle.text = level.challenge;
+        success.text= level.successMessage;
         ToggleElement(changeweight, level.canAdjustWeight);
         ToggleElement(changelength, level.canAdjustLength);
 
