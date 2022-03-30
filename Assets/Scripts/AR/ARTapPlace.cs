@@ -15,7 +15,6 @@ public class ARTapPlace : MonoBehaviour
     public GameObject placement;
     [SerializeField]
     private GameObject objToPlace;
-    [SerializeField]
     private ARSession session;
     
     private Pose placementPose; // Simple data structure that represents a 3D-point
@@ -69,7 +68,7 @@ public class ARTapPlace : MonoBehaviour
     }
 
     /*
-    
+        Re-enables planes
     */
     public void EnablePlanes() {
         arPlaneMgr.enabled = true;
@@ -81,7 +80,7 @@ public class ARTapPlace : MonoBehaviour
     public void DisablePlanes() {
         arPlaneMgr.enabled = false;
         placement.SetActive(false);
-        foreach(GameObject plane in GameObject.FindGameObjectsWithTag("Plane")) {
+        foreach(var plane in arPlaneMgr.trackables) {
             Destroy(plane);
         }
     }
