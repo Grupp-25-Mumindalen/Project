@@ -9,13 +9,22 @@ public class Menu : MonoBehaviour
     [SerializeField] private GameObject challengemenu;
     [SerializeField] private GameObject challenge1;
     [SerializeField] private GameObject exitconfirmation;
+    [SerializeField] private GameObject showHints;
 
     public void openMenu(){
         if(!menuPanel.activeSelf){
-        menuPanel.SetActive(true);
+          menuPanel.SetActive(true);
         }
         else {
           menuPanel.SetActive(false);
+        }
+    }
+    public void showHint(){
+        if(!showHints.activeSelf){
+          showHints.SetActive(true);
+        }
+        else {
+          showHints.SetActive(false);
         }
     }
     public void showAllChallenges(){
