@@ -87,7 +87,7 @@ MonoBehaviour:
       boundMin: 0.5
       boundMax: 0.5
   - name: Pendelns massa
-    challenge: "Testa att byta f\xF6rem\xE5l! P\xE5verkar pendeln av f\xF6rem\xE5lets
+    challenge: "Testa att byta f\xF6rem\xE5l! P\xE5verkas pendeln av f\xF6rem\xE5lets
       vikt?"
     hint: "Testa att f\xE5 pendeln att svinga med alla 3 f\xF6rem\xE5l!"
     successMessage: "Vikten p\xE5 f\xF6rem\xE5let som pendlar p\xE5verkar inte tiden
@@ -120,7 +120,7 @@ MonoBehaviour:
     successMessage: "Vikten p\xE5 f\xF6rem\xE5let som pendlar p\xE5verkar inte tiden
       det tar f\xF6r pendeln att sv\xE4nga! Hur kommer det sig?"
     icon: {fileID: 0}
-    airResistance: 1
+    airResistance: 2
     gravity: 0
     is3D: 0
     canAdjustAngle: 1
