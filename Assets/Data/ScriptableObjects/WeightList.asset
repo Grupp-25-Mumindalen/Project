@@ -16,8 +16,9 @@ MonoBehaviour:
   - name: Milk
     prefab: {fileID: 3021508769059001664, guid: 80df2a16017308e44a43615b4933f2c5,
       type: 3}
-  - name: IsakCube
-    prefab: {fileID: 632963370340665680, guid: 8610a8496c635854dbc67ac7e17b4d72, type: 3}
-  - name: Donut
-    prefab: {fileID: 7339102219357970666, guid: f3263323204f640f5823b1e347394cf4,
+  - name: Apple
+    prefab: {fileID: 2355988255513833051, guid: a2133c29a62b49e45be14f8c77d17b5c,
+      type: 3}
+  - name: Key
+    prefab: {fileID: 3772676188913724492, guid: 763e81ef51013a945a8c81953265c557,
       type: 3}

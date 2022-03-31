@@ -20,9 +20,9 @@ public class RotateModel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-    
+
     /*
     
     */
@@ -48,3 +48,4 @@ public class RotateModel : MonoBehaviour
 
         obj.transform.RotateAround(obj.transform.position, Vector3.up, Vector3.SignedAngle(diff2 - diff1, touchPos2 - touchPos1, Vector3.back));
     }
+}
