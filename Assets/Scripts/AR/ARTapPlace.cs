@@ -16,7 +16,6 @@ public class ARTapPlace : MonoBehaviour
     [SerializeField]
     private GameObject objToPlace;
     private ARSession session;
-    
     private Pose placementPose; // Simple data structure that represents a 3D-point
     private ARSessionOrigin arOrigin;
     private ARRaycastManager rayCastMgr; // Needed to Raycast
@@ -52,7 +51,7 @@ public class ARTapPlace : MonoBehaviour
     */
     public void PlaceObject() {
         objToPlace.SetActive(true);
-        placementPose.position.y += (float)0.65;
+        placementPose.position.y += (float)0.8;
         objToPlace.transform.SetPositionAndRotation(placementPose.position, placementPose.rotation);
         active = true;
         DisablePlanes();

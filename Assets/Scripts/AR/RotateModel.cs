@@ -23,6 +23,9 @@ public class RotateModel : MonoBehaviour
         
     }
     
+    /*
+    
+    */
     public void RotateRoundCenter(Touch touch1, Touch touch2)
     {
         switch (touch1.phase)
@@ -45,36 +48,3 @@ public class RotateModel : MonoBehaviour
 
         obj.transform.RotateAround(obj.transform.position, Vector3.up, Vector3.SignedAngle(diff2 - diff1, touchPos2 - touchPos1, Vector3.back));
     }
-
-    /*
-    public void RotateOneTouch()
-    {
-        var pos = Input.GetTouch(0).position;
-        touchPhase = Input.GetTouch(0).phase;
-        switch (touchPhase)
-        {
-            case TouchPhase.Began:
-                startingPos = pos.x;
-                break;
-            case TouchPhase.Moved:
-                rotate = true;
-                if (startingPos > pos.x)
-                {
-                    obj.transform.Rotate(Vector3.down, -50f * Time.deltaTime);
-                }
-                else if (startingPos < pos.x)
-                {
-                    obj.transform.Rotate(Vector3.down, 50f * Time.deltaTime);
-                }
-                rotate = false;
-                break;
-            case TouchPhase.Ended:
-                if(!rotate)
-                    {
-                    place.PlaceObject();
-                }
-                break;
-        }
-    }
-    */
-}

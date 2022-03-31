@@ -26,9 +26,9 @@ public class InputManager : MonoBehaviour
             case 0:
             break;
             case 1:
-                if(!place.active) {
-                    place.PlaceObject();
-                }
+                //if(!place.active) {
+                //    place.PlaceObject();
+                //}
             break;
             case 2:
                 rot.RotateRoundCenter(Input.GetTouch(0), Input.GetTouch(1));
