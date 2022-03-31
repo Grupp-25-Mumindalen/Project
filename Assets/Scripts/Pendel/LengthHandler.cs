@@ -7,6 +7,7 @@ public class LengthHandler : MonoBehaviour
     private bool canAdjust = true;
     private float pendulumDistance;
     private PendulumManager pendulum;
+
     void Start()
     {
         GeneralEventHandler.current.onCreatePendulum += OnCreatePendulum;
@@ -29,6 +30,7 @@ public class LengthHandler : MonoBehaviour
     {
         pendulum = PendulumManager.current;
         pendulumDistance = pendulum.GetPendulumDistance();
+        print(pendulumDistance);
         canAdjust = true;
     }
     private void OnDestroyPendulum()
@@ -66,4 +68,6 @@ public class LengthHandler : MonoBehaviour
                 SetLength(pendulumDistance - adjustment);
         }
     }
+
+
 }

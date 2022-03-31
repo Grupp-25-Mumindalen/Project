@@ -52,7 +52,7 @@ public class ARTapPlace : MonoBehaviour
     */
     public void PlaceObject() {
         objToPlace.SetActive(true);
-        placementPose.position.y += (float)0.75;
+        placementPose.position.y += (float)0.65;
         objToPlace.transform.SetPositionAndRotation(placementPose.position, placementPose.rotation);
         active = true;
         DisablePlanes();

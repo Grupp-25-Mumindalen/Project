@@ -5,14 +5,13 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
-
-
-    public GameObject menuPanel;
-    public GameObject challengemenu;
-    public GameObject challenge1;
+    [SerializeField] private GameObject menuPanel;
+    [SerializeField] private GameObject challengemenu;
+    [SerializeField] private GameObject challenge1;
+    [SerializeField] private GameObject exitconfirmation;
 
     public void openMenu(){
-        if(!menuPanel.active){
+        if(!menuPanel.activeSelf){
         menuPanel.SetActive(true);
         }
         else {
@@ -29,5 +28,14 @@ public class Menu : MonoBehaviour
     }
     public void showCurrentChallenge(){
       challenge1.SetActive(true);
+    }
+    public void openexitmenu(){
+      exitconfirmation.SetActive(true);
+    }
+    public void exitgame(){
+
+    }
+    public void continuegame(){
+      exitconfirmation.SetActive(false);
     }
 }
