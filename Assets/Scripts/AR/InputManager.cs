@@ -8,10 +8,13 @@ public class InputManager : MonoBehaviour
     private int touchCount;
     private ARTapPlace place;
     private TouchPhase touchPhase;
+    private RotateModel rot;
+
     // Start is called before the first frame update
     void Start()
     {
         place = this.GetComponent<ARTapPlace>();
+        rot = this.GetComponent<RotateModel>();
     }
 
     // Update is called once per frame
@@ -23,31 +26,12 @@ public class InputManager : MonoBehaviour
             case 0:
             break;
             case 1:
-                touchPhase = Input.GetTouch(0).phase;
-                if(touchPhase == TouchPhase.Began){
-                    // If the object has not been placed, place it
-                    if (!place.active)
-                    {
-                        place.PlaceObject();
-                    }
-                    /* This should not be the primary way to Start/Stop Simulation.
-                    else if(!PendulumManager.isActive)
-                    {
-                        EventHandler.current.PendulumSimulationStart();
-                    }
-                    else
-                    {
-                        EventHandler.current.PendulumSimulationStop();
-                    }
-                    */
+                if(!place.active) {
+                    place.PlaceObject();
                 }
             break;
             case 2:
-                touchPhase = Input.GetTouch(0).phase;
-                if(touchPhase == TouchPhase.Began && place.active){
-                    // If the object has been placed, remove it
-                        place.ResetAR();
-                }
+                rot.RotateRoundCenter(Input.GetTouch(0), Input.GetTouch(1));
             break;
             default:
             break;

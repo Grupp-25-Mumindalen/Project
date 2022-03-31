@@ -12,10 +12,9 @@ ARTapPlace handles the placement of the experiment, enable/disable planes and re
 public class ARTapPlace : MonoBehaviour
 {
     [SerializeField]
-    private GameObject placement;
+    public GameObject placement;
     [SerializeField]
     private GameObject objToPlace;
-    [SerializeField]
     private ARSession session;
     
     private Pose placementPose; // Simple data structure that represents a 3D-point
@@ -34,6 +33,9 @@ public class ARTapPlace : MonoBehaviour
         rayCastMgr = this.GetComponent<ARRaycastManager>();
         arPlaneMgr = this.GetComponent<ARPlaneManager>();
         objToPlace.SetActive(false);
+
+        //GeneralEventHandler.current.onCreatePendulum += PlaceObject;
+        //GeneralEventHandler.current.onDestroyPendulum += ResetAR;
     }
 
     // Update is called once per frame
@@ -66,7 +68,7 @@ public class ARTapPlace : MonoBehaviour
     }
 
     /*
-    
+        Re-enables planes
     */
     public void EnablePlanes() {
         arPlaneMgr.enabled = true;
@@ -78,7 +80,7 @@ public class ARTapPlace : MonoBehaviour
     public void DisablePlanes() {
         arPlaneMgr.enabled = false;
         placement.SetActive(false);
-        foreach(GameObject plane in GameObject.FindGameObjectsWithTag("Plane")) {
+        foreach(var plane in arPlaneMgr.trackables) {
             Destroy(plane);
         }
     }

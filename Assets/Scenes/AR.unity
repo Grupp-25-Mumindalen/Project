@@ -4219,13 +4219,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1659859599}
   - component: {fileID: 1659859598}
-  - component: {fileID: 1659859604}
   - component: {fileID: 1659859602}
   - component: {fileID: 1659859600}
   - component: {fileID: 1659859601}
   - component: {fileID: 1659859603}
   - component: {fileID: 1659859606}
   - component: {fileID: 1659859605}
+  - component: {fileID: 1659859607}
   m_Layer: 0
   m_Name: AR Session Origin
   m_TagString: Untagged
@@ -4302,7 +4302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1760703bbd54c04488a8d10600262ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PlanePrefab: {fileID: 4776765576899091622, guid: 3738bd65ede154463b2c35064b9e5fdb,
+  m_PlanePrefab: {fileID: 4542954085389263106, guid: 70bbbbb7f91badb4a9465befc051b4f2,
     type: 3}
   m_DetectionMode: 1
 --- !u!114 &1659859603
@@ -4319,21 +4319,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   placement: {fileID: 1368874960}
   objToPlace: {fileID: 1625105869}
-  session: {fileID: 656880747}
---- !u!114 &1659859604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1659859597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f66da7470dce8f4d821d71dd2b1d4ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_DestroyOnRemoval: 1
-  m_VertexChangedThreshold: 0.01
 --- !u!114 &1659859605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4358,6 +4343,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55b61a038e36b6e47bd9fdbe5735f86c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1659859607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659859597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fafb82a40af07c9438b771a98103b140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obj: {fileID: 1625105869}
 --- !u!1 &1671953595
 GameObject:
   m_ObjectHideFlags: 0
