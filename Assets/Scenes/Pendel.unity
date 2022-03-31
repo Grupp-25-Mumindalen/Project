@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1961,7 +1961,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Donut
+  m_Text: Key
 --- !u!222 &909557084
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3248,7 +3248,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Isak
+  m_Text: "\xC4pple\n"
 --- !u!222 &1443218825
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3940,12 +3940,12 @@ PrefabInstance:
     - target: {fileID: 2525090582287629121, guid: 18a1c13d542fdc242a91fa55c64c476e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.45
       objectReference: {fileID: 0}
     - target: {fileID: 2525090582287629121, guid: 18a1c13d542fdc242a91fa55c64c476e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -4.709
       objectReference: {fileID: 0}
     - target: {fileID: 2525090582287629121, guid: 18a1c13d542fdc242a91fa55c64c476e,
         type: 3}
