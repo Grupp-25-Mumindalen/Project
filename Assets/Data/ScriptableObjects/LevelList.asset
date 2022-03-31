@@ -51,11 +51,11 @@ MonoBehaviour:
     isTimed: 1
     clearTimesOnSimulationStop: 1
     successConditions:
-    - successCondition: 0
+    - successCondition: 3
       conditionValue: 3
       boundMin: 0.5
       boundMax: 0.5
-    - successCondition: 4
+    - successCondition: 0
       conditionValue: 3
       boundMin: 0.5
       boundMax: 0.5

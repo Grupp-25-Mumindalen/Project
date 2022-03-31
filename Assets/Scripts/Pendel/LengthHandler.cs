@@ -55,8 +55,10 @@ public class LengthHandler : MonoBehaviour
         if (canAdjust)
         {
             pendulumDistance = length;
-            if (pendulum)
-                pendulum.SetPendulumDistance(pendulumDistance);
+            if (pendulum){
+                 pendulum.SetPendulumDistance(pendulumDistance);
+            }
+               
         }
     }
 

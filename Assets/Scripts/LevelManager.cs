@@ -20,6 +20,7 @@ public class LevelManager : MonoBehaviour
     private OscillationCounter counter;
     private WeightSelector weightSelector;
     private PendulumManager pendulum;
+    private float baselength;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,7 @@ public class LevelManager : MonoBehaviour
         GeneralEventHandler.current.onGoToNextLevel += OnGoToNextLevel;
         GeneralEventHandler.current.onCreatePendulum += OnCreatePendulum;
         GeneralEventHandler.current.onDestroyPendulum += OnDestroyPendulum;
+
         StartCoroutine(SetUpLevelLoad());
     }
 
@@ -83,6 +85,7 @@ public class LevelManager : MonoBehaviour
             float checkValue = 0;
             float minBound = condition.conditionValue - condition.boundMin;
             float maxBound = condition.conditionValue + condition.boundMax;
+            
             switch (condition.successCondition)
             {
                 case Level.SuccessCondition.Condition.PENDULUM_OSCILLATION:
@@ -95,8 +98,9 @@ public class LevelManager : MonoBehaviour
                     checkValue = weightSelector.GetUniqueWeightSelections().Count;
                     break;
                 case Level.SuccessCondition.Condition.LONGER_LENGTH:
-                    checkValue = PendulumManager.current.getArmLength() - PendulumManager.current.getFormerLength(); //!!!
-                    minBound = 0f;
+                    checkValue = Mathf.Abs(PendulumManager.current.GetPendulumDistance()) - baselength; //!!!
+                    Debug.Log("chechV "+ checkValue + "base "+ baselength);
+                    minBound = 1f;
                     maxBound = 10000f;
                     break;
                 case Level.SuccessCondition.Condition.SHORTER_LENGTH:
@@ -117,6 +121,7 @@ public class LevelManager : MonoBehaviour
     void ClearLevel()
     {
         metSuccessCondition = true;
+        baselength = Mathf.Abs(PendulumManager.current.GetPendulumDistance());// knas blr 100% flyttas typ NU but this shit works so don't touch
         GeneralEventHandler.current.SuccessConditionMet();
       
     }
