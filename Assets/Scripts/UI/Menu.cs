@@ -10,14 +10,15 @@ public class Menu : MonoBehaviour
     [SerializeField] private GameObject challenge1;
     [SerializeField] private GameObject exitconfirmation;
 
-    public void openMenu(){
-        if(!menuPanel.activeSelf){
-        menuPanel.SetActive(true);
-        }
-        else {
-          menuPanel.SetActive(false);
-        }
+    public void ToggleElement(GameObject element){
+      if(!element.activeSelf){
+        element.SetActive(true);
+      }
+      else {
+        element.SetActive(false);
+      }
     }
+
     public void showAllChallenges(){
       challengemenu.SetActive(true);
       challenge1.SetActive(false);

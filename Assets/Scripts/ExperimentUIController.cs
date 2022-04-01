@@ -11,8 +11,10 @@ public class ExperimentUIController : MonoBehaviour
     [SerializeField] private Menu menu;
     [SerializeField] private Text challengeTitle;
     [SerializeField] private Text success;
+    [SerializeField] private Text hint;
     [SerializeField] private GameObject changeweight;
     [SerializeField] private GameObject changelength;
+    [SerializeField] private GameObject changeairresistance;
     [SerializeField] private GameObject nextlevel;
 
 
@@ -32,8 +34,10 @@ public class ExperimentUIController : MonoBehaviour
     {
         challengeTitle.text = level.challenge;
         success.text= level.successMessage;
+        hint.text = level.hint;
         ToggleElement(changeweight, level.canAdjustWeight);
         ToggleElement(changelength, level.canAdjustLength);
+        ToggleElement(changeairresistance, level.canControlAirResistance);
 
     }
 
