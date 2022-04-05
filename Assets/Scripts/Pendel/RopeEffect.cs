@@ -16,7 +16,7 @@ public class RopeEffect : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Vector3 pendulumPosition = pendulumManager.GetAnchorPosition();
         Vector3[] positions = {transform.position, pendulumPosition };

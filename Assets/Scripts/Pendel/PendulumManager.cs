@@ -30,6 +30,8 @@ public class PendulumManager : MonoBehaviour
     private bool isActive = false;
     private float dragScale = 0;
 
+    private float baselength = -4.45f;
+
     private void Start()
     {
         if (current != null)
@@ -53,7 +55,7 @@ public class PendulumManager : MonoBehaviour
 
     public void OnStartSimulation()
     {
-        ResetPendulum();
+        //ResetPendulum(); this shit is honestly not needed?
         InitPendulum();
         SetPendulumActivity(true);
     }
@@ -61,7 +63,8 @@ public class PendulumManager : MonoBehaviour
     public void OnStopSimulation()
     {
         SetPendulumActivity(false);
-        ResetPendulum();
+        PauseReset();
+        //ResetPendulum();
     }
 
     public void SetPendulum2DRotation(float angle)
@@ -82,6 +85,9 @@ public class PendulumManager : MonoBehaviour
         pendulum = obj;
     }
 
+    public float GetDefaultAngle(){
+        return defaultAngle;
+    }
 
     /*
      * This function Initializes the pendulum. Call it anytime you start the experiment.
@@ -112,7 +118,12 @@ public class PendulumManager : MonoBehaviour
         this.dragScale = dragScale;
     }
 
-    //Reset all speed-related pendulum values
+    //Get baselength for pendulum, for resetting between levels
+    public float GetBaselength(){
+        return baselength;
+    }
+
+    //Reset all pendulum values, speed, length, angle
     public void ResetPendulum ()
     {
         initializedDirections = false;
@@ -121,6 +132,19 @@ public class PendulumManager : MonoBehaviour
         formerDirection = 0;
         formerSpeedDirection = 0;
         phaseCounter = 0;
+        //this.SetLength(baselength); //okej detta funkar inte just nu BUG NEJ DEN FINNS I LENGTHHANDLER NU
+
+    }
+
+    // Done on pause, resets speed and supposedly angle
+    public void PauseReset(){
+        initializedDirections = false;
+        acceleration = 0;
+        angularVelocity = 0;
+        formerDirection = 0;
+        formerSpeedDirection = 0;
+        phaseCounter = 0;
+        // TODO: RESET ANGLE
     }
 
     // Update is called once per frame
@@ -228,16 +252,6 @@ public class PendulumManager : MonoBehaviour
     public Vector3 GetAnchorPosition()
     {
         return anchor.transform.position;
-    }
-
-    public float getFormerLength()
-    {
-        return formerLength;
-    }
-
-    public float getArmLength()
-    {
-        return armLength;
     }
 
     public void SetAirResistance(float resistance)

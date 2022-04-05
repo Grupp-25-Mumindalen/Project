@@ -45,8 +45,9 @@ public class Level
             PENDULUM_OSCILLATION,
             TIME_PER_OSCILLATION,
             UNIQUE_WEIGHT_SELECTIONS,
-            SHORTER_LENGTH,
-            LONGER_LENGTH
+            LONGER_LENGTH,
+            SHORTER_LENGTH
+            
 
         }
     }

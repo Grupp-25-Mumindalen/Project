@@ -65,6 +65,7 @@ public class WeightSelector : MonoBehaviour
         {
             currentSelection = index;
             pendulum.ChangeWeight(prefab);
+            PendulumManager.current.SetPendulum2DRotation(PendulumManager.current.GetDefaultAngle());
         }
     }
 
