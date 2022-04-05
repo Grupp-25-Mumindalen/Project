@@ -20,7 +20,6 @@ public class LevelManager : MonoBehaviour
     private OscillationCounter counter;
     private WeightSelector weightSelector;
     private PendulumManager pendulum;
-    private float baselength;
 
     // Start is called before the first frame update
     void Start()
@@ -98,15 +97,17 @@ public class LevelManager : MonoBehaviour
                     checkValue = weightSelector.GetUniqueWeightSelections().Count;
                     break;
                 case Level.SuccessCondition.Condition.LONGER_LENGTH:
-                    checkValue = Mathf.Abs(PendulumManager.current.GetPendulumDistance()) - baselength; //!!!
-                    Debug.Log("chechV "+ checkValue + "base "+ baselength);
-                    minBound = 1f;
-                    maxBound = 10000f;
+                    checkValue = Mathf.Abs(PendulumManager.current.GetPendulumDistance()) + PendulumManager.current.GetBaselength(); //!!!
+                    Debug.Log("checkval shorter "+ checkValue);
+                    minBound = 1f; // New one longer than old one, diff>0
+                    maxBound = 100f; // Godtyckligt stort tal
                     break;
                 case Level.SuccessCondition.Condition.SHORTER_LENGTH:
-                    checkValue = PendulumManager.current.getFormerLength() - PendulumManager.current.getArmLength(); //!!!
-                    minBound = 0f;
-                    maxBound = 10000f;
+                    checkValue = Mathf.Abs(PendulumManager.current.GetPendulumDistance()) + PendulumManager.current.GetBaselength(); //!!!
+                    Debug.Log("checkval shorter "+ checkValue);
+                    
+                    minBound = -100f; // Godtyckligt stort tal
+                    maxBound = -1f; // New one shorter than old one, diff<0
                     break;
             }
 
@@ -121,7 +122,8 @@ public class LevelManager : MonoBehaviour
     void ClearLevel()
     {
         metSuccessCondition = true;
-        baselength = Mathf.Abs(PendulumManager.current.GetPendulumDistance());// knas blr 100% flyttas typ NU but this shit works so don't touch
+        PendulumManager.current.SetPendulumActivity(false);
+       // baselength = Mathf.Abs(PendulumManager.current.GetPendulumDistance());// knas bör 100% flyttas typ NU but this shit works so don't touch
         GeneralEventHandler.current.SuccessConditionMet();
       
     }
@@ -136,6 +138,7 @@ public class LevelManager : MonoBehaviour
             Debug.LogError("Tried going to a null level. Ascertain that the last level in the list has no success conditions.");
         SetConstraints();
         GeneralEventHandler.current.StopPendulumSimulation();
+        PendulumManager.current.ResetPendulum();
         GeneralEventHandler.current.NextLevelLoaded();
     }
 

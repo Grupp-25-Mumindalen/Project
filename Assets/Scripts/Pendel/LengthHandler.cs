@@ -47,7 +47,8 @@ public class LengthHandler : MonoBehaviour
     }
     private void OnGoToNextLevel()
     {
-
+        AdjustLength(PendulumManager.current.GetPendulumDistance()-PendulumManager.current.GetBaselength());
+        PendulumManager.current.SetPendulum2DRotation(PendulumManager.current.GetDefaultAngle());
     }
 
     public void SetLength(float length)
