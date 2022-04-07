@@ -113,12 +113,11 @@ MonoBehaviour:
       boundMin: 0.5
       boundMax: 0.5
   - name: "Luftmotst\xE5nd"
-    challenge: "Har du m\xE4rkt n\xE5got konstigt med pendeln hittills? Den stannar
-      ju inte! I verkligheten finns  luftmotst\xE5nd som saktar ner r\xF6relsen.
-      Testa att s\xE4tta ig\xE5ng pendeln nu och se vad som h\xE4nder!"
-    hint: 
-    successMessage: "Vikten p\xE5 f\xF6rem\xE5let som pendlar p\xE5verkar inte tiden
-      det tar f\xF6r pendeln att sv\xE4nga! Hur kommer det sig?"
+    challenge: "N\xE5got har \xE4ndrats. S\xE4tt ig\xE5ng pendeln och se om du ser
+      vad!"
+    hint: "S\xE4tt ig\xE5ng pendeln igen!"
+    successMessage: "Vi har lagt p\xE5 ett luftmotst\xE5nd! I verkligheten finns
+      luftmotst\xE5ndet alltid d\xE4r."
     icon: {fileID: 0}
     airResistance: 2
     gravity: 0
