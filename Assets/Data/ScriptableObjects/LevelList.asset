@@ -87,11 +87,11 @@ MonoBehaviour:
       boundMin: 0.5
       boundMax: 0.5
   - name: Pendelns massa
-    challenge: "Testa att byta f\xF6rem\xE5l! P\xE5verkas pendeln av f\xF6rem\xE5lets
-      vikt?"
-    hint: "Testa att f\xE5 pendeln att svinga med alla 3 f\xF6rem\xE5l!"
-    successMessage: "Vikten p\xE5 f\xF6rem\xE5let som pendlar p\xE5verkar inte tiden
-      det tar f\xF6r pendeln att sv\xE4nga! Hur kommer det sig?"
+    challenge: "P\xE5verkas pendeln av att f\xF6rem\xE5lets vikt \xE4ndras? Testa
+      med de 3 olika vikterna!"
+    hint: "\xC4ndra vikten med hj\xE4lp av knapparna. Se till att testa varje vikt!"
+    successMessage: "Vikten p\xE5 f\xF6rem\xE5let p\xE5verkar inte tiden det tar
+      f\xF6r pendeln att sv\xE4nga! Hur kommer det sig?"
     icon: {fileID: 0}
     airResistance: 0
     gravity: 0
@@ -113,12 +113,11 @@ MonoBehaviour:
       boundMin: 0.5
       boundMax: 0.5
   - name: "Luftmotst\xE5nd"
-    challenge: "Har du m\xE4rkt n\xE5got konstigt med pendeln hittills? Den stannar
-      ju inte! I verkligheten finns  luftmotst\xE5nd som saktar ner r\xF6relsen.
-      Testa att s\xE4tta ig\xE5ng pendeln nu och se vad som h\xE4nder!"
+    challenge: "Som du kanske har m\xE4rkt stannar inte pendeln, men i verkligheten
+      finns luftmotst\xE5nd. Testa att se vad som h\xE4nder n\xE4r vi slagit p\xE5
+      luftmotst\xE5ndet!"
     hint: 
-    successMessage: "Vikten p\xE5 f\xF6rem\xE5let som pendlar p\xE5verkar inte tiden
-      det tar f\xF6r pendeln att sv\xE4nga! Hur kommer det sig?"
+    successMessage: "Luftmotst\xE5ndet saktar ner pendeln, och g\xF6r att den stannar!"
     icon: {fileID: 0}
     airResistance: 2
     gravity: 0
@@ -135,9 +134,8 @@ MonoBehaviour:
       conditionValue: 5
       boundMin: 0.5
       boundMax: 0.5
-  - name: Utforksa fritt
-    challenge: "H\xE4r kan du testa att \xE4ndra allt fr\xE5n de tidigare experimenten
-      fritt och se hur det p\xE5verkar pendeln!"
+  - name: Utforska fritt
+    challenge: Du har klarat alla uppdrag! Nu kan du testa och utforska pendeln fritt!
     hint: 
     successMessage: 
     icon: {fileID: 0}
