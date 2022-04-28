@@ -175,7 +175,7 @@ public class PendulumManager : MonoBehaviour
 
 
     /*
-     * Checks in which direction the pendulum currently points, and where its velocity vector points towards. 
+     * Checks in which direction the pendulum currently points, and where its velocity vector points towards.
      * When the velocity switches sign, we have switched phase of oscillation
      * When the angle passes the 360-degree mark from any direction, the pendulum has gone through the mid-point
      */
@@ -266,6 +266,6 @@ public class PendulumManager : MonoBehaviour
 
     public void Toggle3D(bool value)
     {
-        is3D = value; 
+        is3D = value;
     }
 }

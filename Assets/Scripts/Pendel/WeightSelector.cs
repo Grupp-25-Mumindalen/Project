@@ -46,11 +46,13 @@ public class WeightSelector : MonoBehaviour
         canDoSelection = false;
         if (!uniqueSelections.Contains(currentSelection))
             uniqueSelections.Add(currentSelection);
+        ExperimentUIController.current.RemoveElementsReplaceObject();
     }
 
     private void OnPendulumSimulationStop()
     {
         canDoSelection = true;
+        ExperimentUIController.current.AddElementsPlaceObject();
     }
 
     private void OnGoToNextLevel ()
