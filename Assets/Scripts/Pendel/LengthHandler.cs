@@ -47,8 +47,8 @@ public class LengthHandler : MonoBehaviour
     }
     private void OnGoToNextLevel()
     {
-        AdjustLength(PendulumManager.current.GetPendulumDistance()-PendulumManager.current.GetBaselength());
-        PendulumManager.current.SetPendulum2DRotation(PendulumManager.current.GetDefaultAngle());
+        
+        
     }
 
     public void SetLength(float length)
@@ -65,12 +65,26 @@ public class LengthHandler : MonoBehaviour
 
     public void AdjustLength(float adjustment)
     {
-        if (canAdjust)
+        
+        if (canAdjust && LengthEditedCheck(adjustment))
         {
             if (pendulum)
                 SetLength(pendulumDistance - adjustment);
         }
     }
 
+    public void ResetLength()
+    {
+         AdjustLength(PendulumManager.current.GetPendulumDistance()-PendulumManager.current.GetBaselength());
+    }
+
+    public bool LengthEditedCheck(float adjustment){
+        if ((PendulumManager.current.GetPendulumDistance() - adjustment )> -1.5f || ((PendulumManager.current.GetPendulumDistance() - adjustment )< -7f)){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
 
 }

@@ -98,16 +98,16 @@ public class LevelManager : MonoBehaviour
                     break;
                 case Level.SuccessCondition.Condition.LONGER_LENGTH:
                     checkValue = Mathf.Abs(PendulumManager.current.GetPendulumDistance()) + PendulumManager.current.GetBaselength(); //!!!
-                    Debug.Log("checkval shorter "+ checkValue);
-                    minBound = 1f; // New one longer than old one, diff>0
+                    
+                    minBound = 0.5f; // New one longer than old one, diff>0
                     maxBound = 100f; // Godtyckligt stort tal
                     break;
                 case Level.SuccessCondition.Condition.SHORTER_LENGTH:
                     checkValue = Mathf.Abs(PendulumManager.current.GetPendulumDistance()) + PendulumManager.current.GetBaselength(); //!!!
-                    Debug.Log("checkval shorter "+ checkValue);
                     
-                    minBound = -100f; // Godtyckligt stort tal
-                    maxBound = -1f; // New one shorter than old one, diff<0
+                    
+                    minBound = -100f; // Godtyckligt stort (but more like litet) tal
+                    maxBound = -0.5f; // New one shorter than old one, diff<0
                     break;
             }
 
@@ -139,6 +139,8 @@ public class LevelManager : MonoBehaviour
         SetConstraints();
         GeneralEventHandler.current.StopPendulumSimulation();
         PendulumManager.current.ResetPendulum();
+        GetComponent<LengthHandler>().ResetLength();
+        PendulumManager.current.SetPendulum2DRotation(PendulumManager.current.GetDefaultAngle());
         GeneralEventHandler.current.NextLevelLoaded();
     }
 
