@@ -8,6 +8,7 @@ public class ExperimentUIController : MonoBehaviour
 {
     public static ExperimentUIController current;
     private UIInterface uiInterface;
+    private LevelManager levelManager;
     [SerializeField] private Menu menu;
     [SerializeField] private Text challengeTitle;
     [SerializeField] private Text success;
@@ -18,11 +19,13 @@ public class ExperimentUIController : MonoBehaviour
     [SerializeField] private GameObject nextlevel;
 
 
+
     public void Start()
     {
         if (!menu)
             Debug.LogError("No Menu has been provided to UI-control. Assign a Menu-reference ASAP. Come on, " + Environment.UserName + ", you can do this");
         current = this;
+        levelManager = LevelManager.current;
     }
 
     public void SetInterface(UIInterface uiInterface)
@@ -39,6 +42,19 @@ public class ExperimentUIController : MonoBehaviour
         ToggleElement(changelength, level.canAdjustLength);
         ToggleElement(changeairresistance, level.canControlAirResistance);
 
+    }
+
+    public void RemoveElementsReplaceObject(){
+        ToggleElement(changeweight, false);
+        ToggleElement(changelength, false);
+        ToggleElement(changeairresistance, false);
+    }
+
+    public void AddElementsPlaceObject(){
+        Level level = levelManager.GetLevel();
+        ToggleElement(changeweight, level.canAdjustWeight);
+        ToggleElement(changelength, level.canAdjustLength);
+        ToggleElement(changeairresistance, level.canControlAirResistance);
     }
 
     public void ToggleElement(GameObject element, bool active)

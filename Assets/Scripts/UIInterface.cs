@@ -12,6 +12,7 @@ public class UIInterface : MonoBehaviour
     private WeightSelector weightSelector;
     private PendulumManager pendulumManager;
     [SerializeField] private ExperimentUIController uiController;
+    [SerializeField] private GameObject stopImage;
 
 
     private bool simulating = false;
@@ -94,9 +95,11 @@ public class UIInterface : MonoBehaviour
     private void OnStartSimulation ()
     {
         simulating = true;
+        stopImage.SetActive(true);
     }
     private void OnStopSimulation ()
     {
         simulating = false;
+        stopImage.SetActive(false);
     }
 }
