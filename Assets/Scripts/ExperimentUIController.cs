@@ -44,13 +44,15 @@ public class ExperimentUIController : MonoBehaviour
 
     }
 
-    public void RemoveElementsReplaceObject(){
+    public void RemoveElementsReplaceObject()
+    {
         ToggleElement(changeweight, false);
         ToggleElement(changelength, false);
         ToggleElement(changeairresistance, false);
     }
 
-    public void AddElementsPlaceObject(){
+    public void AddElementsPlaceObject()
+    {
         Level level = levelManager.GetLevel();
         ToggleElement(changeweight, level.canAdjustWeight);
         ToggleElement(changelength, level.canAdjustLength);
