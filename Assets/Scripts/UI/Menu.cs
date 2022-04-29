@@ -10,7 +10,8 @@ public class Menu : MonoBehaviour
     [SerializeField] private GameObject challenge1;
     [SerializeField] private GameObject exitconfirmation;
 
-    public void ToggleObject(GameObject element){
+    public void ToggleObject(GameObject element)
+    {
         if(!element.activeSelf){
         element.SetActive(true);
         }
@@ -18,23 +19,31 @@ public class Menu : MonoBehaviour
           element.SetActive(false);
         }
     }
-    public void showAllChallenges(){
+
+    public void showAllChallenges()
+    {
       challengemenu.SetActive(true);
       challenge1.SetActive(false);
     }
-    public void closeAllChallenges(){
+
+    public void closeAllChallenges()
+    {
       challengemenu.SetActive(false);
       challenge1.SetActive(true);
     }
-    public void showCurrentChallenge(){
+
+    public void showCurrentChallenge()
+    {
       challenge1.SetActive(true);
     }
-    public void openexitmenu(){
+
+    public void openexitmenu()
+    {
       exitconfirmation.SetActive(true);
     }
-    public void exitgame(){
 
-    }
+    public void exitgame(){}
+
     public void continuegame(){
       exitconfirmation.SetActive(false);
     }
