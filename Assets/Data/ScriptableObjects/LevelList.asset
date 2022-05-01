@@ -137,7 +137,8 @@ MonoBehaviour:
   - name: Utforksa fritt
     challenge: "H\xE4r kan du testa att \xE4ndra allt fr\xE5n de tidigare experimenten
       fritt och se hur det p\xE5verkar pendeln!"
-    hint: 
+    hint: "Klicka p\xE5 knappen l\xE4ngst ner i menyn uppe i h\xF6gra h\xF6rnet f\xF6r
+      att avsluta experimentet"
     successMessage: 
     icon: {fileID: 0}
     airResistance: 0
