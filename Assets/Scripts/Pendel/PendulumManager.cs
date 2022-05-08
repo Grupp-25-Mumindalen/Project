@@ -28,7 +28,7 @@ public class PendulumManager : MonoBehaviour
 
     private bool initializedDirections = false;
     private bool isActive = false;
-    private float dragScale = 0;
+    public float dragScale = 0;
 
     private float baselength = -4.45f;
 

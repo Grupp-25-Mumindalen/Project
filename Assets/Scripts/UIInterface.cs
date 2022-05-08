@@ -72,12 +72,14 @@ public class UIInterface : MonoBehaviour
             weightSelector.ChangeWeight(weightID);
         }
     }
+    public void ToggleAirResistance()
+    {
+      if(pendulumManager.dragScale==0)
+        pendulumManager.SetDragScale(1);
+      else
+        pendulumManager.SetDragScale(0);
 
-
-
-
-
-
+    }
 
 
 
