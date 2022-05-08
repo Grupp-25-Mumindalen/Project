@@ -119,7 +119,7 @@ MonoBehaviour:
     successMessage: "Vi har lagt p\xE5 ett luftmotst\xE5nd! I verkligheten finns
       luftmotst\xE5ndet alltid d\xE4r."
     icon: {fileID: 0}
-    airResistance: 2
+    airResistance: 1
     gravity: 0
     is3D: 0
     canAdjustAngle: 1
@@ -134,14 +134,14 @@ MonoBehaviour:
       conditionValue: 5
       boundMin: 0.5
       boundMax: 0.5
-  - name: Utforksa fritt
+  - name: Utforska fritt
     challenge: "H\xE4r kan du testa att \xE4ndra allt fr\xE5n de tidigare experimenten
       fritt och se hur det p\xE5verkar pendeln!"
     hint: "Klicka p\xE5 knappen l\xE4ngst ner i menyn uppe i h\xF6gra h\xF6rnet f\xF6r
       att avsluta experimentet"
     successMessage: 
     icon: {fileID: 0}
-    airResistance: 0
+    airResistance: 1
     gravity: 0
     is3D: 0
     canAdjustAngle: 1
